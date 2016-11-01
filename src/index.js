@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppRouter from './routes';
-import './App.css';
+import './main.css';
 
 injectTapEventPlugin();
 
