@@ -1,9 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppRouter from './routes';
+import './App.css';
+
+injectTapEventPlugin();
+
+const MUIWrapper = () => (
+  <MuiThemeProvider>
+    <AppRouter />
+  </MuiThemeProvider>
+);
 
 ReactDOM.render(
-  <App />,
+  <MUIWrapper />,
   document.getElementById('root')
 );
