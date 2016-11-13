@@ -33,9 +33,9 @@ const AppointmentCard = ({ id, patient, doctor, date, period, no, print, reappoi
       <p>คุณนัดแพทย์ไว้เมื่อ</p>
       <p className="date">
         {/*`${moment(date).date()} ${moment(date).month()} ${moment(date).year()}`*/}
-        {`วันที่ ${moment(date).date()} มกราคม ${moment(date).year() + 543}`}
+        {`วันที่ ${moment(date).date()} ${moment(date).format('MMMM')} ${moment(date).year() + 543}`}
       </p>
-      <p className="period">{ period === 'morning' ? 'ช่วงเช้า' : 'ช่วงบ่าย'}</p>
+      <p className="period">{ period.id === '1' ? 'ช่วงเช้า' : 'ช่วงบ่าย'}</p>
       { print ?
         <RaisedButton
           label="พิมพ์ใบนัดแพทย์"

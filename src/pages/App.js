@@ -44,7 +44,7 @@ class App extends Component {
         currentUser: {
           firstname: 'จิรัฐ',
           lastname: 'อ้นอารี',
-          hnNumber: '9999',
+          id: '12',
           role: 'doctor',
         },
       });

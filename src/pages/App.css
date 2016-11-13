@@ -4,6 +4,10 @@
   background-color: #f8f8f8;
 }
 
+.head-text {
+  text-align: center;
+}
+
 #nav {
   position: fixed;
   top: 0;

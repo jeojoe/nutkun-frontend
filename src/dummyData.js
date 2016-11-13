@@ -52,32 +52,38 @@ const dumpAppointed = () => {
       patient: {
         name: 'จนิน',
         surename: 'ควย',
-        hospitalID: 21,
+        hospitalID: '21',
       },
       doctor: {
-        hospitalID: 11,
+        hospitalID: '11',
         name: 'จิรัฐ',
         surename: 'ควย',
         department: 'แผนกโย่ๆหสดหกด',
       },
-      date: moment().subtract(Math.floor(Math.random() * 10), 'days').format(),
-      period: 'morning',
+      datetime: moment().subtract(Math.floor(Math.random() * 10), 'days').format(),
+      period: {
+        id: '1',
+        name: 'ช่วงเช้า',
+      },
     },
     {
       id: '123124',
       patient: {
         name: 'จนิน',
         surename: 'ควย',
-        hospitalID: 22,
+        hospitalID: '22',
       },
       doctor: {
-        hospitalID: 12,
+        hospitalID: '12',
         name: 'จิรัฐกิกิ',
         surename: 'ควย',
         department: 'แผนกโย่ๆหสดหกด',
       },
-      date: moment().subtract(Math.floor(Math.random() * 10), 'days').format(),
-      period: 'morning',
+      datetime: moment().subtract(Math.floor(Math.random() * 10), 'days').format(),
+      period: {
+        id: '2',
+        name: 'ช่วงบ่าย',
+      },
     },
   ];
 };

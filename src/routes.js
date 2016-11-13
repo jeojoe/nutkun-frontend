@@ -5,10 +5,10 @@ import Index from './pages/Index';
 import Auth from './pages/auth';
 
 // patient
-import PatientAppoint from './pages/patient/Appoint';
-import PatientAppoint2 from './pages/patient/Appoint2';
-import PatientAppointOption from './pages/patient/AppointOption';
-import PatientAppointOption2 from './pages/patient/AppointOption2';
+import AppointChooseDoctor from './pages/appointment/AppointChooseDoctor';
+import AppointChoosePatient from './pages/appointment/AppointChoosePatient';
+import AppointChooseDate from './pages/appointment/AppointChooseDate';
+import Reappoint from './pages/appointment/Reappoint';
 import PatientPrint from './pages/patient/Print';
 import PatientHistory from './pages/patient/History';
 
@@ -17,13 +17,16 @@ const AppRouter = () => (
     <Route path="/" component={App}>
       <IndexRoute component={Auth} />
       <Route path="patient" component={Index} />
-      <Route path="patient/appoint" component={PatientAppoint} />
-      <Route path="patient/appoint/:id" component={PatientAppoint2} />
-      <Route path="patient/appoint-option" component={PatientAppointOption} />
-      <Route path="patient/appoint-option/:id" component={PatientAppointOption2} />
+      <Route path="patient/appoint/:patientID" component={AppointChooseDoctor} />
+      <Route path="patient/appoint/:patientID/:doctorID" component={AppointChooseDate} />
+      <Route path="patient/reappoint" component={Reappoint} />
+      <Route path="patient/reappoint/:appointmentID" component={AppointChooseDate} />
       <Route path="patient/print" component={PatientPrint} />
       <Route path="patient/history" component={PatientHistory} />
+
       <Route path="doctor" component={Index} />
+      <Route path="doctor/appoint/:doctorID" component={AppointChoosePatient} />
+      <Route path="doctor/appoint/:doctorID/:patientID" component={AppointChooseDate} />
     </Route>
   </Router>
 );
