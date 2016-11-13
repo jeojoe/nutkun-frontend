@@ -1,0 +1,31 @@
+#auth {
+  width: 400px;
+  margin: 0 auto;
+  padding: 180px 0; 
+}
+
+#auth .logo {
+  display: block;
+  width: 300px;
+  margin: 0 auto 30px;
+}
+
+#auth .fields {
+  width: 363px;
+  display: block;
+  margin: 0 auto;
+}
+
+#auth .fields input {
+  width: 100%;
+  border: none;
+  height: 55px;
+  font-size: 18px;
+  padding-left: 24px;
+  margin-bottom: 20px;
+}
+
+#auth .login-btn {
+  float: right;
+  margin: 10px 18px;
+}

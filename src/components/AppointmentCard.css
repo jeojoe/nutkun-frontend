@@ -1,0 +1,69 @@
+.appoint-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 0 auto 15px;
+  max-width: 750px;
+  padding: 15px 20px;
+  position: relative;
+}
+
+.appoint-card .no {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.appoint-card .left {
+  width: 300px;
+  display: inline-block;
+  vertical-align: top;
+  padding-left: 50px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.appoint-card .left p {
+  margin: 0;
+  font-size: 17px;
+}
+
+.appoint-card .left .sub {
+  color: #bbb;
+  font-size: 15px;
+}
+
+.appoint-card .left .plus {
+  font-size: 20px;
+  margin: 7px 0;
+}
+
+.appoint-card .right {
+  width: 400px;
+  display: inline-block;
+  vertical-align: top;
+  padding: 20px 0;
+  text-align: right;
+}
+
+.appoint-card .right p {
+  margin: 0;
+  font-size: 14px;
+  color: #bbb;
+}
+
+.appoint-card .right .date {
+  margin: 7px 0 0;
+  font-size: 32px;
+  color: #1ABC9C;
+}
+
+.appoint-card .right .period {
+  font-size: 17px;
+  color: #222;
+}
+
+.appoint-card .right .btn {
+  margin: 10px 0 0 10px;
+}
+
+

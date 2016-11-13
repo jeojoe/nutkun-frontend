@@ -1,0 +1,9 @@
+#patient-appoint2 .head-text {
+  text-align: center;
+}
+
+#patient-appoint2 .datepicker-wrapper {
+  display: inline-block;
+  width: 400px;
+  vertical-align: top;
+}

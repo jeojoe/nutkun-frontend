@@ -1,0 +1,13 @@
+#patient-history input {
+  padding-right: 50px;
+}
+
+#patient-history .edit-prohibit {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /*background-color: red;*/
+  z-index: 9;
+  top: 0;
+  left: 0;
+}
