@@ -10,16 +10,25 @@ class Reappoint extends Component {
     this.reappoint = this.reappoint.bind(this);
   }
 
+  getAppointment() {
+    return dumpAppointed();
+  }
+
   reappoint(appointID) {
-    this.props.router.push(`/patient/reappoint/${appointID}`);
+    this.props.router.push(`/reappoint/${appointID}`);
+    // const { pathname } = this.props.location;
+
+    // if (pathname.indexOf('patient') > 0) {
+    //   this.props.router.push(`/patient/reappoint/${appointID}`);
+    // } else if (pathname.indexOf('doctor') > 0) {
+    //   this.props.router.push(`/doctor/reappoint/${appointID}`);
+    // } else if (pathname.indexOf('nurse') > 0) {
+    //   this.props.router.push(`/nurse/reappoint/${appointID}`);
+    // } else if ()
   }
 
   cancal() {
 
-  }
-
-  getAppointment() {
-    return dumpAppointed();
   }
 
   renderAppointment() {

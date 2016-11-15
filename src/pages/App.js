@@ -42,16 +42,16 @@ class App extends Component {
       // return <div>no currentUser</div>;
       this.setState({
         currentUser: {
-          firstname: 'จิรัฐ',
-          lastname: 'อ้นอารี',
+          name: 'จิรัฐ',
+          surename: 'อ้นอารี',
           id: '12',
-          role: 'doctor',
+          role: 'staff',
         },
       });
       return <div></div>;
     }
 
-    const { firstname, lastname, role, hnNumber } = currentUser;
+    const { name, surename, role, id } = currentUser;
 
     switch (role) {
       case 'patient':
@@ -89,7 +89,7 @@ class App extends Component {
                     </Link>
                     <div className="right">
                       <div className="user">
-                        <p>{`${currentUser.roleText}${firstname} ${lastname}, HN${hnNumber}`}</p>
+                        <p>{`${currentUser.roleText}${name} ${surename}, HN${id}`}</p>
                       </div>
                       <div className="signout" onClick={this.signout}>
                         <i className="fa fa-power-off"></i>

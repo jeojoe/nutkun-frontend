@@ -27,14 +27,27 @@ class AppointChoosePatient extends Component {
 
   renderPatients() {
     const { doctorID } = this.props.params;
+    const path = this.props.location.pathname;
+    const isNurseOrStaff = path.indexOf('nurse') > 0 || path.indexOf('staff');
+    const isDiagnose = path.indexOf('diagnose') > 0;
+
     return this.state.patients.map(patient => (
       <UserCard
         src={patient.image}
         name={`ผู้ป่วย${patient.name} ${patient.surename}`}
         surename={patient.surename}
         detail={`รหัสโรงพยาบาล ${patient.hospitalID}`}
-        buttonText="เพิ่มนัดแพทย์"
-        buttonLink={`/doctor/appoint/${doctorID}/${patient.hospitalID}`}
+        buttonText={doctorID ? 'เพิ่มนัดผู้ป่วย'
+          : isDiagnose ?
+            'วินิจฉัยโรคผู้ป่วย'
+              : 'ดูข้อมูลผู้ป่วย'}
+        buttonLink={doctorID ?
+          `/${isNurseOrStaff ? 'nurse' : 'doctor'}/appoint/${doctorID}/${patient.hospitalID}`
+          : isDiagnose ?
+            `/${isNurseOrStaff ? 'nurse' : 'doctor'}/diagnose/${patient.hospitalID}`
+            : `/${isNurseOrStaff ? 'nurse' : 'doctor'}/history/${patient.hospitalID}`}
+        buttonText2={doctorID || isDiagnose ? false : 'ดูประวัติการรักษา'}
+        buttonLink2={doctorID || isDiagnose ? false : `/doctor/treat-history/${patient.hospitalID}`}
         key={patient.hospitalID}
       />
     ));
@@ -46,7 +59,7 @@ class AppointChoosePatient extends Component {
       <div className="template" id="patient-appoint">
         <div className="header-wrapper">
           <div className="left">
-            เพิ่มนัดผู้ป่วย
+            {doctorID ? 'เพิ่มนัดผู้ป่วย' : 'เลือกผู้ป่วย'}
           </div>
           <div className="right">
           </div>

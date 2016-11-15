@@ -92,3 +92,15 @@
   border-radius: 5px;
   border: 1px solid #eee;
 }
+
+.datepicker-wrapper {
+  display: inline-block;
+  width: 400px;
+  vertical-align: top;
+}
+
+.users-wrapper {
+  display: inline-block;
+  width: 300px;
+  vertical-align: top;
+}

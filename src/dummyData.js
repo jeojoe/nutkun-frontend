@@ -1,5 +1,25 @@
 import moment from 'moment';
 
+// class Doctor {
+//   constructor(hospitalID, name, surename, department) {
+//     this.hospitalID = hospitalID;
+//     this.name = name;
+//     this.surename = surename;
+//     this.department = department;
+//   }
+// }
+
+// class Patient {
+//   constructor(hospitalID, name, surename) {
+//     this.hospitalID = hospitalID;
+//     this.name = name;
+//     this.surename = surename;
+//   }
+// }
+
+// class Period {
+//   constructor(id, name, surename)
+// }
 const dumpDoctors = () => {
   return [
     {

@@ -54,7 +54,7 @@ class Print extends Component {
             label="ย้อนกลับ"
             backgroundColor="#95a5a6"
             labelColor="#fff"
-            onClick={() => this.props.router.push('/patient')}
+            onClick={() => this.props.router.goBack()}
           />
         </div>
       </div>

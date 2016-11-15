@@ -9,7 +9,6 @@ import FlatButton from 'material-ui/FlatButton';
 import areIntlLocalesSupported from 'intl-locales-supported';
 import UserCard from '../../components/UserCard';
 import { dumpDoctors, dumpPeriods, dumpAppointed, dumpPatients } from '../../dummyData';
-import './AppointChooseDate.css';
 
 let DateTimeFormat;
 
@@ -59,7 +58,6 @@ class AppointChooseDate extends Component {
     if (!doctorID || !patientID) {
       doctorID = appointment.doctor.hospitalID;
       patientID = appointment.patient.hospitalID;
-      console.log(doctorID, patientID);
     }
 
     allPatients.forEach(pat => {

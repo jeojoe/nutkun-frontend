@@ -22,10 +22,10 @@ class Auth extends Component {
     }
     // Temp login logic determining role
     let user = {
-      firstname: 'จิรัฐ',
-      lastname: 'อ้นอารี',
-      hnNumber: '9999',
-      role: 'patient',
+      name: 'จิรัฐ',
+      surename: 'อ้นอารี',
+      id: '9999',
+      role: username,
     };
 
     switch (username) {
@@ -43,15 +43,27 @@ class Auth extends Component {
         break;
       case 'nurse':
         user.role = 'nurse';
+        this.props.authUser(user, () => {
+          this.props.router.push('/nurse');
+        });
         break;
       case 'staff':
         user.role = 'staff';
+        this.props.authUser(user, () => {
+          this.props.router.push('/staff');
+        });
         break;
       case 'pharmacist':
         user.role = 'pharmacist';
+        this.props.authUser(user, () => {
+          this.props.router.push('/pharmacist');
+        });
         break;
       case 'admin':
         user.role = 'admin';
+        this.props.authUser(user, () => {
+          this.props.router.push('/admin');
+        });
         break;
       default:
         break;

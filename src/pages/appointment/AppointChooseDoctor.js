@@ -28,21 +28,35 @@ class AppointChooseDoctor extends Component {
 
   renderDoctors() {
     const { patientID } = this.props.params;
-    return this.state.doctors.map(doctor => (
-      <UserCard
-        src={doctor.image}
-        name={`นายแพทย์${doctor.name} ${doctor.surename}`}
-        surename={doctor.surename}
-        detail={doctor.department}
-        buttonText="เพิ่มนัดแพทย์"
-        buttonLink={`/patient/appoint/${patientID}/${doctor.hospitalID}`}
-        key={doctor.hospitalID}
-      />
-    ));
+    if (patientID) {
+      return this.state.doctors.map(doctor => (
+        <UserCard
+          src={doctor.image}
+          name={`นายแพทย์${doctor.name} ${doctor.surename}`}
+          surename={doctor.surename}
+          detail={doctor.department}
+          buttonText="เพิ่มนัดแพทย์"
+          buttonLink={`/patient/appoint/${patientID}/${doctor.hospitalID}`}
+          key={doctor.hospitalID}
+        />
+      ));
+    } else {
+      return this.state.doctors.map(doctor => (
+        <UserCard
+          src={doctor.image}
+          name={`นายแพทย์${doctor.name} ${doctor.surename}`}
+          surename={doctor.surename}
+          detail={doctor.department}
+          buttonText="เพิ่มนัดแพทย์"
+          buttonLink={`/nurse/appoint/${doctor.hospitalID}`}
+          key={doctor.hospitalID}
+        />
+      ));
+    }
   }
 
   render() {
-    const { patientID } = this.props.params;
+    // const { patientID } = this.props.params;
     return (
       <div className="template" id="patient-appoint">
         <div className="header-wrapper">

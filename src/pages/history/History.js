@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
+import { dumpPatients } from '../../dummyData';
 import './History.css';
 
 class History extends Component {
@@ -128,7 +129,7 @@ class History extends Component {
             label="ย้อนกลับ"
             backgroundColor="#95a5a6"
             labelColor="#fff"
-            onClick={() => this.props.router.push('/patient')}
+            onClick={() => this.props.router.goBack()}
           />
           { this.state.editable ?
             <RaisedButton
