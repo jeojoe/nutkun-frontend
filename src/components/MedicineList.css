@@ -1,0 +1,33 @@
+.medicine-list {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 0 auto 20px;
+  max-width: 730px;
+  padding: 10px 50px;
+  position: relative;
+}
+
+.medicine-list.alert {
+  border: 2px solid red;
+}
+
+.medicine-list .no {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.medicine-list p, .medicine-list h6 {
+  display: inline-block;
+  margin: 0;
+}
+
+.medicine-list p {
+  float: right;
+}
+
+.medicine-list .btn {
+  position: absolute;
+  top: 40px;
+  right: 30px;
+}

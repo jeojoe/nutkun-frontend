@@ -86,22 +86,26 @@ class History extends Component {
               floatingLabelText="ชื่อ"
               ref={(input) => { this.name = input; }}
             />
+            <br />
             <TextField
               defaultValue={surename}
               floatingLabelText="นามสกุล"
               ref={(input) => { this.surename = input; }}
             />
+            <br />
             <TextField
               defaultValue={username}
               floatingLabelText="ชื่อผู้ใช้งาน"
               ref={(input) => { this.username = input; }}
             />
+            <br />
             <TextField
               defaultValue={password}
               floatingLabelText="รหัสผ่าน"
               type="password"
               ref={(input) => { this.password = input; }}
             />
+            <br />
             <DatePicker
               floatingLabelText="วันเกิด"
               container="inline"
@@ -109,21 +113,25 @@ class History extends Component {
               defaultDate={birthdate}
               ref={(input) => { this.birthdate = input; }}
             />
+            <br />
             <TextField
               defaultValue={address}
               floatingLabelText="ที่อยู่"
               ref={(input) => { this.address = input; }}
             />
+            <br />
             <TextField
               defaultValue={email}
               floatingLabelText="อีเมล"
               ref={(input) => { this.email = input; }}
             />
+            <br />
             <TextField
               defaultValue={telNo}
               floatingLabelText="เบอร์โทรศัพท์"
               ref={(input) => { this.telNo = input; }}
             />
+            <br />
           </div>
           <RaisedButton
             label="ย้อนกลับ"

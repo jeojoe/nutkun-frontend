@@ -1,0 +1,14 @@
+.personnal-list img {
+  width: 80px;
+  height: 80px;
+  background-color: #ddd;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.personnal-list .detail-wrapper {
+  padding-left: 20px;
+  width: 400px;
+  display: inline-block;
+  vertical-align: middle;
+}

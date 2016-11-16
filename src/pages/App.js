@@ -45,7 +45,7 @@ class App extends Component {
           name: 'จิรัฐ',
           surename: 'อ้นอารี',
           id: '12',
-          role: 'staff',
+          role: 'admin',
         },
       });
       return <div></div>;

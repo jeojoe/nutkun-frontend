@@ -1,6 +1,6 @@
 .app {
   width: 100%;
-  min-height: 900px;
+  min-height: 700px;
   background-color: #f8f8f8;
 }
 
@@ -50,6 +50,10 @@
   cursor: pointer;
 }
 
+.template {
+  padding-bottom: 50px;
+}
+
 .template > .header-wrapper {
   margin: 60px auto 0;
   height: 100px;
@@ -88,14 +92,14 @@
   width: 900px;
   min-height: 400px;
   margin: 0 auto;
-  padding: 22px 30px;
+  padding: 22px 30px 40px;
   border-radius: 5px;
   border: 1px solid #eee;
 }
 
 .datepicker-wrapper {
   display: inline-block;
-  width: 400px;
+  width: 450px;
   vertical-align: top;
 }
 

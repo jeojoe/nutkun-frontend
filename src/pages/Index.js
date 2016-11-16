@@ -46,8 +46,8 @@ class Index extends Component {
         { name: 'พิมพ์ใบนัดแพทย์', path: '/print' },
       ],
       admin: [
-        { name: 'แก้ไขข้อมูลยา', path: '/admin/drug' },
-        { name: 'แก้ไขข้อมูลโรค', path: '/admin/symptoms' },
+        { name: 'แก้ไขข้อมูลยา', path: '/admin/medicine' },
+        { name: 'แก้ไขข้อมูลโรค', path: '/admin/disease' },
         { name: 'จัดการข้อมูลบุคลากร', path: '/admin/personnal' },
         { name: 'ออกรายงานผู้ใช้ระบบ', path: '/admin/report' },
       ],

@@ -14,6 +14,13 @@ import Temp from './pages/schedule/Temp';
 import Print from './pages/print/Print';
 import PatientHistory from './pages/history/History';
 import DiagnoseBasic from './pages/diagnose/DiagnoseBasic';
+import PharmacistIndex from './pages/pharmacist/Index';
+import Prescription from './pages/pharmacist/Prescription';
+import EditMedicine from './pages/admin/EditMedicine';
+import EditDisease from './pages/admin/EditDisease';
+import EditPersonnal from './pages/admin/EditPersonnal';
+import EditPersonnal2 from './pages/admin/EditPersonnal2';
+import Report from './pages/admin/Report';
 
 const AppRouter = () => (
   <Router history={browserHistory} onUpdate={() => window.scrollTo(0, 0)}>
@@ -50,6 +57,14 @@ const AppRouter = () => (
       <Route path="staff/appoint/:doctorID" component={AppointChoosePatient} />
       <Route path="staff/appoint/:doctorID/:patientID" component={AppointChooseDate} />
 
+      {/* admin */}
+      <Route path="admin" component={Index} />
+      <Route path="admin/medicine" component={EditMedicine} />
+      <Route path="admin/disease" component={EditDisease} />
+      <Route path="admin/personnal" component={EditPersonnal} />
+      <Route path="admin/personnal/:personnalID" component={EditPersonnal2} />
+      <Route path="admin/report" component={Report} />
+
       {/* Reappointment */}
       <Route path="reappoint" component={Reappoint} />
       <Route path="reappoint/:appointmentID" component={AppointChooseDate} />
@@ -59,6 +74,9 @@ const AppRouter = () => (
 
       {/* Schedule */}
       <Route path="schedule/:doctorID" component={Temp} />
+
+      <Route path="pharmacist" component={PharmacistIndex} />
+      <Route path="pharmacist/prescription/:prescriptionID" component={Prescription} />
 
     </Route>
   </Router>
