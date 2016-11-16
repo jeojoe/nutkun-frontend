@@ -4,9 +4,13 @@
   padding: 180px 0; 
 }
 
+#auth h4 {
+  color: #1abc9c;
+  text-align: center;
+}
 #auth .logo {
   display: block;
-  width: 300px;
+  width: 160px;
   margin: 0 auto 30px;
 }
 
@@ -28,4 +32,8 @@
 #auth .login-btn {
   float: right;
   margin: 10px 18px;
+}
+
+#auth input.matcherror {
+  border: 1px solid red;
 }

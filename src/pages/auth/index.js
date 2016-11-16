@@ -13,9 +13,8 @@ class Auth extends Component {
 
   login() {
     // Login api
-    const username = this.username.value;
+    const username = this.hn.value;
     const password = this.password.value;
-    console.log(username, password);
     if (!username || !password) {
       alert('กรุณากรอก username หรือ password');
       return;
@@ -73,12 +72,13 @@ class Auth extends Component {
   render() {
     return (
       <div id="auth">
+        <h4>โรงพยาบาลอาจารย์ธาราทิพย์</h4>
         <img src={logo} role="presentation" className="logo" />
         <div className="fields">
           <input
             type="text"
-            placeholder="ชื่อผู้ใช้งาน"
-            ref={(c) => { this.username = c; }}
+            placeholder="เลขประจำตัวโรงพยาบาล"
+            ref={(c) => { this.hn = c; }}
           />
           <input
             type="password"
@@ -97,6 +97,8 @@ class Auth extends Component {
         <FlatButton
           label="ลืมรหัสผ่าน"
           className="forgot-btn"
+          style={{ marginTop: '10px' }}
+          onClick={() => this.props.router.push('/forgot')}
         />
       </div>
     );

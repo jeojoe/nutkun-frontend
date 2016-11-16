@@ -3,6 +3,8 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import App from './pages/App';
 import Index from './pages/Index';
 import Auth from './pages/auth';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import ChangePassword from './pages/auth/ChangePassword';
 
 // patient
 import AppointChooseDoctor from './pages/appointment/AppointChooseDoctor';
@@ -26,6 +28,8 @@ const AppRouter = () => (
   <Router history={browserHistory} onUpdate={() => window.scrollTo(0, 0)}>
     <Route path="/" component={App}>
       <IndexRoute component={Auth} />
+      <Route path="forgot" component={ForgotPassword} />
+      <Route path="change/:hn" component={ChangePassword} />
 
       {/* Patient */}
       <Route path="patient" component={Index} />

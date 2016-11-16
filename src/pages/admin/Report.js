@@ -21,7 +21,6 @@ class Report extends Component {
   }
 
   componentDidMount() {
-    console.log('whattt');
     let ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
       type: this.state.graphStyle,

@@ -78,7 +78,7 @@ class App extends Component {
 
     return (
       <div className="app">
-        { router.isActive('/', true) ?
+        { router.isActive('/', true) || router.isActive('/forgot', true) || this.props.location.pathname.indexOf('/change/') >= 0 ?
           '' :
             <div id="nav">
               <div className="container">
