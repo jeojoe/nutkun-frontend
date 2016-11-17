@@ -48,12 +48,12 @@ class Index extends Component {
           <div>
             {this.renderPrescriptions()}
           </div>
-          <RaisedButton
+          {/*<RaisedButton
             label="ย้อนกลับ"
             backgroundColor="#95a5a6"
             labelColor="#fff"
             onClick={() => this.props.router.goBack()}
-          />
+          />*/}
         </div>
       </div>
     );

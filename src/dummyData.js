@@ -130,6 +130,8 @@ const dumpPrescriptions = () => {
         {
           id: 1,
           name: 'janin แพ้',
+          status: 'wait',
+          dose: 2,
         },
         {
           id: 2,

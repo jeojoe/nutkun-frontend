@@ -28,7 +28,7 @@ class AppointChoosePatient extends Component {
   renderPatients() {
     const { doctorID } = this.props.params;
     const path = this.props.location.pathname;
-    const isNurseOrStaff = path.indexOf('nurse') > 0 || path.indexOf('staff');
+    const isNurseOrStaff = path.indexOf('nurse') > 0 || path.indexOf('staff') > 0;
     const isDiagnose = path.indexOf('diagnose') > 0;
 
     return this.state.patients.map(patient => (
