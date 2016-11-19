@@ -15,6 +15,7 @@ class DiseaseListEdit extends Component {
     this.setState({ open: false });
   }
   render() {
+    // eslint-disable-next-line
     const { no, name, id, info, ICD10 } = this.props;
     const actions = [
       <RaisedButton

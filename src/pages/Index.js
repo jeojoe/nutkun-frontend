@@ -5,11 +5,10 @@ import './Index.css';
 class Index extends Component {
   renderButtons(buttons) {
     return buttons.map((btn, i) => (
-      <div>
+      <div key={i} >
         <Link
           className="btn"
           to={btn.path}
-          key={i}
         >{btn.name}</Link>
       </div>
     ));
@@ -20,16 +19,16 @@ class Index extends Component {
 
     const indexButtons = {
       patient: [
-        { name: 'เพิ่มนัดแพทย์', path: `/patient/appoint/${currentUser.id}` },
+        { name: 'เพิ่มนัดแพทย์', path: `/patient/appoint/${currentUser.hospitalID}` },
         { name: 'ยกเลิก/เลื่อนนัดแพทย์', path: '/reappoint' },
         { name: 'พิมพ์ใบนัดแพทย์', path: '/print' },
-        { name: 'ข้อมูลส่วนตัวผู้ป่วย', path: `/patient/history/${currentUser.id}` },
+        { name: 'ข้อมูลส่วนตัวผู้ป่วย', path: `/patient/history/${currentUser.hospitalID}` },
       ],
       doctor: [
-        { name: 'เพิ่มนัดผู้ป่วย', path: `/doctor/appoint/${currentUser.id}` },
+        { name: 'เพิ่มนัดผู้ป่วย', path: `/doctor/appoint/${currentUser.hospitalID}` },
         { name: 'ยกเลิก/เลื่อนนัดผู้ป่วย', path: '/reappoint' },
         { name: 'ดูข้อมูลผู้ป่วย', path: '/doctor/history' },
-        { name: 'จัดตารางออกตรวจ', path: `/schedule/${currentUser.id}` },
+        { name: 'จัดตารางออกตรวจ', path: `/schedule/${currentUser.hospitalID}` },
         { name: 'บันทึกการวินิจฉัยโรค', path: '/doctor/diagnose' },
       ],
       nurse: [

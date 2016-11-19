@@ -11,7 +11,6 @@ import AppointChooseDoctor from './pages/appointment/AppointChooseDoctor';
 import AppointChoosePatient from './pages/appointment/AppointChoosePatient';
 import AppointChooseDate from './pages/appointment/AppointChooseDate';
 import Reappoint from './pages/appointment/Reappoint';
-import Schedule from './pages/schedule/Schedule';
 import Temp from './pages/schedule/Temp';
 import Print from './pages/print/Print';
 import PatientHistory from './pages/history/History';

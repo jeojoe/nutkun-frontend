@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import logo from '../logo-small.png';
 import './index.css';
+import { login } from '../../dummyAPI';
 
 class Auth extends Component {
   constructor(props) {
@@ -12,54 +13,49 @@ class Auth extends Component {
   }
 
   login() {
-    // Login api
-    const username = this.hn.value;
+    const hn = this.hn.value;
     const password = this.password.value;
-    if (!username || !password) {
-      alert('กรุณากรอก username หรือ password');
+    if (!hn || !password) {
+      alert('กรุณากรอก รหัสโรงพยาบาล หรือ รหัสผ่าน');
       return;
     }
-    // Temp login logic determining role
-    let user = {
-      name: 'จิรัฐ',
-      surename: 'อ้นอารี',
-      id: '9999',
-      role: username,
-    };
 
-    switch (username) {
+    const res = login(hn, password);
+    if (!res.success) {
+      alert(res.message);
+      return;
+    }
+
+    const user = res.data;
+    window.localStorage.setItem('currentUser', JSON.stringify(user));
+
+    switch (user.role) {
       case 'patient':
-        user.role = 'patient';
         this.props.authUser(user, () => {
           this.props.router.push('/patient');
         });
         break;
       case 'doctor':
-        user.role = 'doctor';
         this.props.authUser(user, () => {
           this.props.router.push('/doctor');
         });
         break;
       case 'nurse':
-        user.role = 'nurse';
         this.props.authUser(user, () => {
           this.props.router.push('/nurse');
         });
         break;
       case 'staff':
-        user.role = 'staff';
         this.props.authUser(user, () => {
           this.props.router.push('/staff');
         });
         break;
       case 'pharmacist':
-        user.role = 'pharmacist';
         this.props.authUser(user, () => {
           this.props.router.push('/pharmacist');
         });
         break;
       case 'admin':
-        user.role = 'admin';
         this.props.authUser(user, () => {
           this.props.router.push('/admin');
         });

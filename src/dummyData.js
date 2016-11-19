@@ -1,240 +1,152 @@
 import moment from 'moment';
+import { User, Department, Medicine, Period } from './dummyClass';
 
-// class Doctor {
-//   constructor(hospitalID, name, surename, department) {
-//     this.hospitalID = hospitalID;
-//     this.name = name;
-//     this.surename = surename;
-//     this.department = department;
-//   }
-// }
+/*
+  === Department : Data===
+*/
+const departments = [
+  new Department('1', 'ศัลยกรรม'),
+  new Department('2', 'อายุรกรรม'),
+];
 
-// class Patient {
-//   constructor(hospitalID, name, surename) {
-//     this.hospitalID = hospitalID;
-//     this.name = name;
-//     this.surename = surename;
-//   }
-// }
-
-// class Period {
-//   constructor(id, name, surename)
-// }
-
-const dumpDoctors = () => {
-  return [
-    {
-      hospitalID: '11',
-      name: 'จนิน',
-      surename: 'คูวิจิตร',
-      department: 'ลมพัดลมเพ โอ่ละเห่',
-    },
-    {
-      hospitalID: '12',
-      name: 'จิรัฐ',
-      surename: 'อ้นอารี',
-      department: 'สบายสบายสไตล์คุณหมอ',
-    },
-  ];
-};
-
-const dumpPatients = () => {
-  return [
-    {
-      hospitalID: '21',
-      name: 'จนิน',
-      surename: 'คูวิจิตร',
-      allergy: [1],
-    },
-    {
-      hospitalID: '22',
-      name: 'จิรัฐ',
-      surename: 'อ้นอารี',
-      allergy: [2],
-    },
-  ];
-};
-
-const dumpPeriods = () => {
-  return [
-    {
-      id: '1',
-      name: 'ช่วงเช้า',
-    },
-    {
-      id: '2',
-      name: 'ช่วงบ่าย',
-    },
-  ];
-};
-
-const dumpAppointed = () => {
-  return [
-    {
-      id: '123123',
-      patient: {
-        name: 'จนิน',
-        surename: 'ควย',
-        hospitalID: '21',
-      },
-      doctor: {
-        hospitalID: '11',
-        name: 'จิรัฐ',
-        surename: 'ควย',
-        department: 'แผนกโย่ๆหสดหกด',
-      },
-      datetime: moment().subtract(Math.floor(Math.random() * 10), 'days').format(),
-      period: {
-        id: '1',
-        name: 'ช่วงเช้า',
-      },
-    },
-    {
-      id: '123124',
-      patient: {
-        name: 'จนิน',
-        surename: 'ควย',
-        hospitalID: '22',
-      },
-      doctor: {
-        hospitalID: '12',
-        name: 'จิรัฐกิกิ',
-        surename: 'ควย',
-        department: 'แผนกโย่ๆหสดหกด',
-      },
-      datetime: moment().subtract(Math.floor(Math.random() * 10), 'days').format(),
-      period: {
-        id: '2',
-        name: 'ช่วงบ่าย',
-      },
-    },
-  ];
-};
-
-const dumpPrescriptions = () => {
-  return [
-    {
-      id: '1',
-      patient: {
-        hospitalID: '22',
-        name: 'จิรัฐ',
-        surename: 'อ้นอารี',
-        allergy: [
-          {
-            id: 2,
-            name: 'jirat แพ้',
-          }
-        ],
-      },
-      medicine: [
-        {
-          id: 1,
-          name: 'janin แพ้',
-          status: 'wait',
-          dose: 2,
-        },
-        {
-          id: 2,
-          name: 'jirat แพ้',
-        },
-      ],
-    },
-    {
-      id: '2',
-      patient: {
-        hospitalID: '21',
-        name: 'จนิน',
-        surename: 'คูวิจิตร',
-        allergy: [
-          {
-            id: 1,
-            name: 'janin แพ้',
-          }
-        ],
-      },
-      medicine: [
-        {
-          id: 1,
-          name: 'janin แพ้',
-        },
-        {
-          id: 2,
-          name: 'jirat แพ้',
-        },
-      ],
-    },
-  ];
-};
+/*
+  === Medicines : Data ===
+*/
+const medicines = [
+  new Medicine('1', 'ยาราไนก้า', 'ยาดี จิรัฐแพ้'),
+  new Medicine('2', 'ยาหมอมี', 'ยานี้จนินแพ้'),
+];
 
 const dumpMedicines = () => {
-  return [
-    {
-      id: '1',
-      name: 'ยาราไนก้า',
-      info: 'ยาดี มีกำลัง พังพินาศ',
-    },
-    {
-      id: '2',
-      name: 'ยาหมอมี',
-      info: 'ยานี้หมอมี คนไข้ไม่มี',
-    },
-  ];
+  return medicines;
 };
 
-const dumpDiseases = () => {
-  return [
-    {
-      id: '1',
-      ICD10: '1234',
-      name: 'โรคยาราไนก้า',
-      info: 'ยาดี มีกำลัง พังพินาศ',
-    },
-    {
-      id: '2',
-      ICD10: '3432',
-      name: 'โรคยาหมอมี',
-      info: 'ยานี้หมอมี คนไข้ไม่มี',
-    },
-  ];
-};
+/*
+  === Users : Data & API ===
+*/
+const users = [
+  new User('0', 'hn0', 'จิรัฐ', 'อยากเป็นหมอ1', 'doctor', 'อยากเป็นหมอคริๆๆ', '1160100439880', 'usernamedoctor1', 'passworddoctor', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'male', 'doctor1@gmail.com', '0906866563', [departments[0].name], null),
+  new User('1', 'hn1', 'จิรัฐ', 'อยากเป็นหมอ2', 'doctor', 'อยากเป็นหมอคริๆๆ', '1160100439881', 'usernamedoctor2', 'passworddoctor', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'male', 'doctor2@gmail.com', '0906866563', [departments[1].name], null),
+  new User('2', 'hn2', 'จิรัฐ', 'อยากเป็นผู้ป่วย', 'patient', 'อยากเป็นผู้ป่วยคริๆๆ', '1160100439882', 'usernamepatient1', 'passwordpatient', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'female', 'patient1@gmail.com', '0906866563', null, [medicines[0]]),
+  new User('3', 'hn3', 'จิรัฐ', 'อยากเป็นพยาบาล', 'nurse', 'อยากเป็นพยาบาลคริๆๆ', '1160100439883', 'usernamenurse', 'passwordnurse', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'female', 'nurse@gmail.com', '0906866563'),
+  new User('4', 'hn4', 'จิรัฐ', 'อยากเป็นเจ้าหน้าที่', 'staff', 'อยากเป็นเจ้าหน้าที่คริๆๆ', '1160100439884', 'usernamestaff', 'passwordstaff', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'male', 'staff@gmail.com', '0906866563'),
+  new User('5', 'hn5', 'จิรัฐ', 'อยากเป็นเภสัชร', 'pharmacist', 'อยากเป็นเภสัชรคริๆๆ', '1160100439885', 'usernamepharmacist', 'passwordpharmacist', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'female', 'pharmacist@gmail.com', '0906866563'),
+  new User('6', 'hn6', 'จิรัฐ', 'อยากเป็นแอดมิน', 'admin', 'อยากเป็นแอดมินคริๆๆ', '1160100439886', 'usernameadmin', 'passwordadmin', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'female', 'admin@gmail.com', '0906866563'),
+  new User('7', 'hn7', 'จนิน', 'ชอบป่วย', 'patient', 'อยากเป็นผู้ป่วยคริๆๆ', '1160100439887', 'usernamepatient2', 'passwordpatient', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'male', 'patient2@gmail.com', '0906866563', null, [medicines[1]]),
+];
 
 const dumpUsers = () => {
-  return [
-    {
-      id: '1',
-      hospitalID: '11',
-      name: 'จนิน',
-      surename: 'คูวิจิตร',
-      department: 'ลมพัดลมเพ โอ่ละเห่',
-      role: 'doctor',
-      email: '123123@gmail.com',
-      password: '1414324',
-      telNo: '0906868564',
-      gender: 'male',
-      PID: '1160100439333',
-      address: '77/6 m.3 t. bangpai',
-      username: 'ads342sdf',
-      birthdate: new Date(),
-    },
-    {
-      id: '2',
-      hospitalID: '12',
-      name: 'จิรัฐ',
-      surename: 'อ้นอารี',
-      department: 'สบายสบายสไตล์คุณหมอ',
-      role: 'doctor',
-      email: '123123@gmail.com',
-      password: '1414324',
-      telNo: '0906868564',
-      gender: 'female',
-      PID: '1160100439333',
-      address: '77/6 m.3 t. bangpai',
-      username: 'adsfadf',
-      birthdate: new Date(),
-    },
-  ];
+  return users;
 };
 
+const dumpDoctors = () => {
+  return users.filter((user) => {
+    return user.role === 'doctor';
+  });
+};
+
+function getDoctor(hospitalID) {
+  return users.find(user => user.hospitalID === hospitalID);
+}
+
+const dumpPatients = () => {
+  return users.filter((user) => {
+    return user.role === 'patient';
+  });
+};
+
+function getPatient(hospitalID) {
+  return users.find(user => user.hospitalID === hospitalID);
+}
+
+/*
+  === Periods : Data & API ===
+*/
+const periods = [
+  new Period('1', 'ช่วงเช้า'),
+  new Period('2', 'ช่วงบ่าย'),
+];
+
+const dumpPeriods = () => {
+  return periods;
+};
+
+/*
+  === Appointment : Data & API ===
+*/
+let appointmentIndex = 3;
+const appointments = [
+  {
+    id: '1',
+    patient: users[2],
+    doctor: users[0],
+    datetime: moment().subtract(Math.floor(Math.random() * 10), 'days').format(),
+    period: periods[0],
+  },
+  {
+    id: '2',
+    patient: users[7],
+    doctor: users[1],
+    datetime: moment().subtract(Math.floor(Math.random() * 10), 'days').format(),
+    period: periods[1],
+  },
+];
+
+const dumpAppointed = () => {
+  return appointments;
+};
+
+function insertAppointment(appointment) {
+  appointment.id = appointmentIndex;
+  appointments.push(appointment);
+  appointmentIndex += 1;
+}
+
+/*
+  === Prescription : Data ===
+*/
+const prescriptions = [
+  {
+    id: '1',
+    patient: users[2],
+    medicine: [medicines[0], medicines[1]],
+  },
+  {
+    id: '2',
+    patient: users[7],
+    medicine: [medicines[0], medicines[1]],
+  },
+];
+
+const dumpPrescriptions = () => {
+  return prescriptions;
+};
+
+/*
+  === Disease : Data ===
+*/
+const diseases = [
+  {
+    id: '1',
+    ICD10: '1234',
+    name: 'โรคยาราไนก้า',
+    info: 'ยาดี มีกำลัง พังพินาศ',
+  },
+  {
+    id: '2',
+    ICD10: '3432',
+    name: 'โรคยาหมอมี',
+    info: 'ยานี้หมอมี คนไข้ไม่มี',
+  },
+];
+
+const dumpDiseases = () => {
+  return diseases;
+};
+
+/*
+  Report
+*/
 const dumpDatasets = () => {
   return [
     {
@@ -260,4 +172,6 @@ const dumpDatasets = () => {
   ];
 };
 
-export { dumpDoctors, dumpPatients, dumpPeriods, dumpAppointed, dumpPrescriptions, dumpMedicines, dumpDiseases, dumpUsers, dumpDatasets };
+const dataAPI = { insertAppointment, getDoctor, getPatient };
+
+export { dumpDoctors, dumpPatients, dumpPeriods, dumpAppointed, dumpPrescriptions, dumpMedicines, dumpDiseases, dumpUsers, dumpDatasets, dataAPI };

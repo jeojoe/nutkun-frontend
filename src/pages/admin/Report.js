@@ -22,6 +22,7 @@ class Report extends Component {
 
   componentDidMount() {
     let ctx = document.getElementById('myChart').getContext('2d');
+    // eslint-disable-next-line
     var myChart = new Chart(ctx, {
       type: this.state.graphStyle,
       data: {
@@ -37,6 +38,7 @@ class Report extends Component {
     newChart.id = 'myChart';
     oldChart.parentNode.replaceChild(newChart, oldChart);
     const ctx = document.getElementById('myChart').getContext('2d');
+    // eslint-disable-next-line
     var myChart = new Chart(ctx, {
       type: value,
       data: {

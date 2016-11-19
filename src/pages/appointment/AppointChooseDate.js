@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import moment from 'moment';
@@ -5,10 +6,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import Calendar from 'material-ui/DatePicker/Calendar';
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 import areIntlLocalesSupported from 'intl-locales-supported';
 import UserCard from '../../components/UserCard';
 import { dumpDoctors, dumpPeriods, dumpAppointed, dumpPatients } from '../../dummyData';
+import { insertAppoint, checkAppoint } from '../../dummyAPI';
 
 let DateTimeFormat;
 
@@ -28,17 +29,18 @@ class AppointChooseDate extends Component {
       allAppointments: [],
       openSuccess: false,
       openFail: false,
-      selectedDate: '',
-      selectedPeriod: '',
+      openDone: false,
+      errorMessage: '',
     };
     this.renderPeriods = this.renderPeriods.bind(this);
-    this.checkIsFree = this.checkIsFree.bind(this);
-    this.handleCloseFail = this.handleCloseFail.bind(this);
-    this.handleCloseSuccess = this.handleCloseSuccess.bind(this);
+    this.checkAppoint = this.checkAppoint.bind(this);
+    this.saveAppoint = this.saveAppoint.bind(this);
+    this.handleClose = this.handleClose.bind(this);
     this.changePeriod = this.changePeriod.bind(this);
   }
 
   componentWillMount() {
+    // eslint-disable-next-line
     let { params: { doctorID, patientID, appointmentID } } = this.props;
     const allAppointments = dumpAppointed();
     const allPatients = dumpPatients();
@@ -75,31 +77,35 @@ class AppointChooseDate extends Component {
     this.setState({ appointment, patient, doctor, periods, allAppointments, period: appointment ? appointment.period : { id: '1', name: 'ช่วงเช้า' } });
   }
 
-  checkIsFree() {
-    const pickedDate = this.calendar;
-    let isFailed = false;
-    this.state.allAppointments.map((date) => {
-      const isSame = moment(pickedDate.state.selectedDate).isSame(date.datetime, 'day');
-      if (isSame) {
-        this.setState({
-          openFail: true,
-          selectedDate: pickedDate.state.selectedDate,
-        });
-        isFailed = true;
-      }
-    });
-    if (!isFailed) this.setState({
-      openSuccess: true,
-      selectedDate: pickedDate.state.selectedDate,
-    });
+  checkAppoint() {
+    const pickedDate = this.calendar.state.selectedDate;
+    const { doctor, patient, period } = this.state;
+    const result = checkAppoint(doctor.hospitalID, patient.hospitalID, pickedDate, period);
+    if (!result.success) {
+      this.setState({
+        openFail: true,
+        errorMessage: result.message,
+      });
+    } else {
+      this.setState({
+        openSuccess: true,
+        errorMessage: result.message,
+      });
+    }
   }
 
-  handleCloseFail() {
-    this.setState({ openFail: false });
-  }
-
-  handleCloseSuccess() {
-    this.setState({ openSuccess: false });
+  saveAppoint() {
+    console.log('yoo');
+    const pickedDate = this.calendar.state.selectedDate;
+    const { doctor, patient, period } = this.state;
+    const result = insertAppoint(doctor, patient, pickedDate, period);
+    if (result.success) {
+      this.setState({
+        openSuccess: false,
+        openDone: true,
+        errorMessage: result.message,
+      });
+    }
   }
 
   changePeriod(value) {
@@ -108,6 +114,10 @@ class AppointChooseDate extends Component {
         this.setState({ period });
       }
     });
+  }
+
+  handleClose() {
+    this.setState({ openFail: false });
   }
 
   renderPeriods() {
@@ -121,7 +131,8 @@ class AppointChooseDate extends Component {
   }
 
   render() {
-    const { doctor, patient, appointment, period, openFail, openSuccess, selectedDate } = this.state;
+    const { doctor, patient, appointment, period, openFail, openSuccess, openDone, errorMessage } = this.state;
+    const { role } = this.props.currentUser;
     const failedActions = [
       <RaisedButton
         label="เลือกเวลานัดใหม่"
@@ -145,7 +156,16 @@ class AppointChooseDate extends Component {
         backgroundColor="#2ecc71"
         keyboardFocused
         labelColor="#fff"
-        onTouchTap={this.handleCloseSuccess}
+        onTouchTap={this.saveAppoint}
+        style={{ margin: '15px' }}
+      />,
+    ];
+    const doneActions = [
+      <RaisedButton
+        label="ย้อนกลับไปที่หน้าหลัก"
+        backgroundColor="#95a5a6"
+        labelColor="#fff"
+        onTouchTap={() => this.props.router.push(`/${role}`)}
         style={{ margin: '15px' }}
       />,
     ];
@@ -197,6 +217,9 @@ class AppointChooseDate extends Component {
                 }).format}
                 style={{ width: '100%' }}
                 ref={(input) => { this.calendar = input; }}
+                shouldDisableDate={(date) => {
+                  return moment().isAfter(date, 'day');
+                }}
               />
             </div>
           </div>
@@ -211,7 +234,7 @@ class AppointChooseDate extends Component {
             backgroundColor="#e67e22"
             labelColor="#fff"
             style={{ float: 'right' }}
-            onClick={this.checkIsFree}
+            onClick={this.checkAppoint}
           />
         </div>
         <Dialog
@@ -219,18 +242,25 @@ class AppointChooseDate extends Component {
           actions={failedActions}
           modal={false}
           open={openFail}
-          onRequestClose={this.handleCloseFail}
+          onRequestClose={this.handleClose}
         >
-          {`ไม่สามารถนัดแพทย์ได้ในวันที่ ${moment(selectedDate).format('LL')} (${period.name})`}
+          {errorMessage}
         </Dialog>
         <Dialog
           title="สำเร็จ !"
           actions={successActions}
           modal={false}
           open={openSuccess}
-          onRequestClose={this.handleCloseSuccess}
         >
-          {`สามารถนัดแพทย์ได้ในวันที่ ${moment(selectedDate).format('LL')} (${period.name})`}
+          {errorMessage}
+        </Dialog>
+        <Dialog
+          title="ทำนัดเรียบร้อย !"
+          actions={doneActions}
+          modal={false}
+          open={openDone}
+        >
+          {errorMessage}
         </Dialog>
       </div>
     );

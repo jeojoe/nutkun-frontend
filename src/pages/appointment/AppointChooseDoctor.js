@@ -21,6 +21,7 @@ class AppointChooseDoctor extends Component {
 
   getDoctors() {
     const doctors = dumpDoctors();
+    console.log(doctors);
     this.setState({
       doctors,
     });

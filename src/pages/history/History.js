@@ -3,7 +3,6 @@ import { withRouter } from 'react-router';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
-import { dumpPatients } from '../../dummyData';
 import './History.css';
 
 class History extends Component {

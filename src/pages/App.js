@@ -12,7 +12,19 @@ class App extends Component {
     this.authUser = this.authUser.bind(this);
     this.signout = this.signout.bind(this);
   }
-  
+
+  componentWillMount() {
+    const currentUserStr = window.localStorage.getItem('currentUser');
+    if (!currentUserStr) {
+      this.signout();
+      return;
+    } else {
+      this.setState({
+        currentUser: JSON.parse(currentUserStr),
+      });
+    }
+  }
+
   authUser(user, callback) {
     this.setState({
       currentUser: user,
@@ -20,12 +32,13 @@ class App extends Component {
   }
 
   signout() {
+    window.localStorage.setItem('currentUser', '');
     this.props.router.push('/');
   }
 
   render() {
     const { children, router } = this.props;
-    let { currentUser } = this.state;
+    const { currentUser } = this.state;
     // no user login
     if (router.isActive('/', true)) {
       return (
@@ -37,45 +50,7 @@ class App extends Component {
       );
     }
 
-    if (!router.isActive('/', true) && !currentUser) {
-      // router.push('/');
-      // return <div>no currentUser</div>;
-      this.setState({
-        currentUser: {
-          name: 'จิรัฐ',
-          surename: 'อ้นอารี',
-          id: '12',
-          role: 'doctor',
-        },
-      });
-      return <div></div>;
-    }
-
     const { name, surename, role, id } = currentUser;
-
-    switch (role) {
-      case 'patient':
-        currentUser.roleText = 'ผู้ป่วย';
-        break;
-      case 'doctor':
-        currentUser.roleText = 'แพทย์';
-        break;
-      case 'nurse':
-        currentUser.roleText = 'พยาบาล';
-        break;
-      case 'staff':
-        currentUser.roleText = 'เจ้าหน้าที่';
-        break;
-      case 'pharmacist':
-        currentUser.roleText = 'เภสัชกร';
-        break;
-      case 'admin':
-        currentUser.roleText = 'ผู้ดูแลระบบ';
-        break;
-      default:
-        break;
-    }
-
     return (
       <div className="app">
         { router.isActive('/', true) || router.isActive('/forgot', true) || this.props.location.pathname.indexOf('/change/') >= 0 ?

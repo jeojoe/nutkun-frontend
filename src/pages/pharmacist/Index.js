@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import RaisedButton from 'material-ui/RaisedButton';
 import PrescriptionList from '../../components/PrescriptionList';
 import { dumpPrescriptions } from '../../dummyData';
 
