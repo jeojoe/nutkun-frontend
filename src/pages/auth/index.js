@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-import logo from '../logo-small.png';
 import './index.css';
 import { login } from '../../dummyAPI';
 
@@ -69,7 +68,7 @@ class Auth extends Component {
     return (
       <div id="auth">
         <h4>โรงพยาบาลอาจารย์ธาราทิพย์</h4>
-        <img src={logo} role="presentation" className="logo" />
+        <img src="/logo-small.png" role="presentation" className="logo" />
         <div className="fields">
           <input
             type="text"

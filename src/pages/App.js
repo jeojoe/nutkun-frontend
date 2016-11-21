@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { RouteTransition } from 'react-router-transition';
 import { Link, withRouter } from 'react-router';
 import './App.css';
-import logo from './logo-small.png';
 
 class App extends Component {
   constructor(props) {
@@ -64,7 +63,7 @@ class App extends Component {
                 <div className="row">
                   <div className="twelve columns">
                     <Link to={`/${role}`}>
-                      <img id="logo" src={logo} role="presentation" />
+                      <img id="logo" src="/logo-small.png" role="presentation" />
                     </Link>
                     <div className="right">
                       <div className="user">
