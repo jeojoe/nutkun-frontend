@@ -38,6 +38,9 @@ class Reappoint extends Component {
   }
 
   renderAppointment() {
+    if (this.state.appointmentsOfUser.length === 0) {
+      return <p style={{ textAlign: 'center', margin: '100px 0 200px', color: '#999' }}>คุณยังไม่มีการทำนัดแพทย์อยู่ในระบบ</p>;
+    }
     return this.state.appointmentsOfUser.map((ap, i) => (
       <AppointmentCard
         patient={ap.patient}

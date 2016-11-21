@@ -1,27 +1,25 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
+import axios from 'axios';
+import Loading from '../../components/Loading';
 import UserCard from '../../components/UserCard';
-import { dumpPatients } from '../../dummyData';
 
 class AppointChoosePatient extends Component {
   constructor(props) {
     super(props);
     this.state = {
       patients: [],
+      loading: true,
     };
-    this.getPatients = this.getPatients.bind(this);
     this.renderPatients = this.renderPatients.bind(this);
   }
 
-  componentWillMount() {
-    this.getPatients();
-  }
-
-  getPatients() {
-    const patients = dumpPatients();
-    this.setState({
-      patients,
+  componentDidMount() {
+    axios.get('https://nutkun.himikorin.com:4443/api/user')
+    .then(res => {
+      const patients = res.data.data.filter(u => u.role === 'patient');
+      this.setState({ patients, loading: false });
     });
   }
 
@@ -54,6 +52,7 @@ class AppointChoosePatient extends Component {
   }
 
   render() {
+    if (this.state.loading) return <Loading />
     const { doctorID } = this.props.params;
     return (
       <div className="template" id="patient-appoint">

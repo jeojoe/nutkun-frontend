@@ -75,22 +75,22 @@ const dumpPeriods = () => {
 /*
   === Appointment : Data & API ===
 */
-let appointmentIndex = 3;
+let appointmentIndex = 1;
 const appointments = [
-  {
-    id: '1',
-    patient: users[2],
-    doctor: users[0],
-    datetime: moment().subtract(Math.floor(Math.random() * 10), 'days').format(),
-    period: periods[0],
-  },
-  {
-    id: '2',
-    patient: users[7],
-    doctor: users[1],
-    datetime: moment().subtract(Math.floor(Math.random() * 10), 'days').format(),
-    period: periods[1],
-  },
+  // {
+  //   id: '1',
+  //   patient: users[2],
+  //   doctor: users[0],
+  //   datetime: moment().subtract(Math.floor(Math.random() * 10), 'days').format(),
+  //   period: periods[0],
+  // },
+  // {
+  //   id: '2',
+  //   patient: users[7],
+  //   doctor: users[1],
+  //   datetime: moment().subtract(Math.floor(Math.random() * 10), 'days').format(),
+  //   period: periods[1],
+  // },
 ];
 
 const dumpAppointed = () => {

@@ -58,7 +58,7 @@ class DiagnoseDoctor extends Component {
       <div className="template" id="patient-history">
         <div className="header-wrapper">
           <div className="left">
-            บันทึกการวินิจฉัยโรคเบื้องต้น
+            บันทึกการวินิจฉัยโรคของแพทย์
           </div>
           <div className="right">
           </div>
