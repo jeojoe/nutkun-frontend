@@ -6,6 +6,8 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import areIntlLocalesSupported from 'intl-locales-supported';
 import RaisedButton from 'material-ui/RaisedButton';
+import axios from 'axios';
+import Loading from '../../components/Loading';
 import UserCard from '../../components/UserCard';
 import { dumpUsers, dumpDepartments } from '../../dummyData';
 import './EditPersonnal2.css';
@@ -36,13 +38,12 @@ class EditPersonnal2 extends Component {
       image: '',
       birthdate: Date.now(),
       allDepartments: null,
+      loading: true,
     };
-    this.getData = this.getData.bind(this);
     this.save = this.save.bind(this);
   }
 
   componentWillMount() {
-    this.getData();
     const path = this.props.location.pathname;
     const isDoctor = path.indexOf('/doctor') >= 0;
     const isNurse = path.indexOf('/nurse') >= 0;
@@ -51,57 +52,66 @@ class EditPersonnal2 extends Component {
     }
   }
 
-  getData() {
+  componentDidMount() {
     const { personnalID } = this.props.params;
-    const allDepartments = dumpDepartments();
-    console.log(allDepartments);
-    // const allRoles = ['doctor', 'patient', 'nurse', 'staff', 'pharmacist', 'admin'];
-    if (personnalID !== '-1') {
-      const personnal = dumpUsers().find(u => u.hospitalID === personnalID);
-      const { name, surename, username, password, birthdate,
-      address, email, telNo, department, role, gender, PID, image } = personnal;
-      this.setState({
-        name,
-        surename,
-        department,
-        role,
-        email,
-        password,
-        telNo,
-        gender,
-        PID,
-        address,
-        username,
-        image,
-        birthdate,
-        allDepartments,
-      });
-    } else {
-      this.setState({
-        allDepartments,
-      });
-    }
+
+    // Get all departments
+    axios.get('https://nutkun.himikorin.com:4443/api/department').then((allDepartments) => {
+      if (personnalID !== '-1') {
+        // Get user data
+        axios.get(`https://nutkun.himikorin.com:4443/api/user/${personnalID}`).then((personnal) => {
+          const { name, surename, username, password, birthdate, address, email, telNo, department, role, gender, PID } = personnal.data.data[0];
+          this.setState({
+            name,
+            surename,
+            department,
+            role,
+            email,
+            password,
+            telNo,
+            gender,
+            PID,
+            address,
+            username,
+            birthdate,
+            allDepartments: allDepartments.data.data,
+            loading: false,
+          });
+        });
+      } else {
+        this.setState({
+          allDepartments: allDepartments.data.data,
+          loading: false,
+        });
+      }
+    });
   }
 
   save() {
-    // const { name, surename, username, password, birthdate,
-    //   address, email, telNo, department, role, gender, PID, image } = this.state;
-    // this.setState({
-    //   hospitalID: 'new user',
-    //   name,
-    //   surename,
-    //   department,
-    //   role,
-    //   email,
-    //   password,
-    //   telNo,
-    //   gender,
-    //   PID,
-    //   address,
-    //   username,
-    //   image,
-    //   birthdate,
-    // });
+    const { name, surename, username, password, birthdate,
+      address, email, telNo, department, role, gender, PID } = this.state;
+    axios.put(`https://nutkun.himikorin.com:4443/api/user/${this.props.params.personnalID}`, {
+      name,
+      surename,
+      department,
+      role,
+      email,
+      password,
+      telNo,
+      gender,
+      PID,
+      address,
+      username,
+      birthdate,
+    })
+    .then(function (response) {
+      console.log(response);
+      alert('บันทึกข้อมูลเรียบร้อย!');
+    })
+    .catch(function (error) {
+      alert('เกิดข้อผิดพลาด !');
+      console.log(error);
+    });
   }
 
   renderDepartmentItems() {
@@ -111,12 +121,13 @@ class EditPersonnal2 extends Component {
   }
 
   render() {
+    if (this.state.loading) return <Loading />;
     const { name, surename, username, password, birthdate, address, email, telNo, image, role, department, isSeeOnly } = this.state;
     return (
       <div className="template" id="edit-personnal">
         <div className="header-wrapper">
           <div className="left">
-            แก้ไขข้อมูลบุคลากร
+            ข้อมูลผู้ใช้งานระบบ
           </div>
           <div className="right">
           </div>

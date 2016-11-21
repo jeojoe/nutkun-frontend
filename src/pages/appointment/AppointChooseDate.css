@@ -1,0 +1,13 @@
+#patient-appoint-choose-date .periods-radio {
+  margin: 15px 0 20px;
+}
+
+#patient-appoint-choose-date .periods-radio > div {
+  width: 140px !important;
+  display: inline-block !important;
+}
+
+#patient-appoint-choose-date .datepicker-wrapper > div:nth-child(2) {
+  width: 100% !important;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+}

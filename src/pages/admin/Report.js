@@ -3,6 +3,8 @@ import Chart from 'chart.js';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import axios from 'axios';
+import Loading from '../../components/Loading';
 import { dumpDatasets } from '../../dummyData';
 
 class Report extends Component {
@@ -11,24 +13,30 @@ class Report extends Component {
     this.state = {
       datasets: null,
       graphStyle: 'line',
+      loading: true,
     };
     this.handleGraphStyleChange = this.handleGraphStyleChange.bind(this);
   }
 
   componentWillMount() {
-    const datasets = dumpDatasets();
-    this.setState({ datasets });
+    // const datasets = dumpDatasets();
+    // this.setState({ datasets });
   }
 
   componentDidMount() {
-    let ctx = document.getElementById('myChart').getContext('2d');
-    // eslint-disable-next-line
-    var myChart = new Chart(ctx, {
-      type: this.state.graphStyle,
-      data: {
-        labels: ['จันทร์', 'อังคาร', 'พุธ', 'พฤหัส', 'ศุกร์', 'เสาร์', 'อาทิตย์'],
-        datasets: this.state.datasets,
-      },
+    axios.get('https://nutkun.himikorin.com:4443/api/report').then(res => {
+      const datasets = res.data.data;
+      this.setState({ datasets, loading: false }, () => {
+        let ctx = document.getElementById('myChart').getContext('2d');
+        // eslint-disable-next-line
+        var myChart = new Chart(ctx, {
+          type: this.state.graphStyle,
+          data: {
+            labels: ['จันทร์', 'อังคาร', 'พุธ', 'พฤหัส', 'ศุกร์', 'เสาร์', 'อาทิตย์'],
+            datasets: this.state.datasets,
+          },
+        });
+      });
     });
   }
 
@@ -50,6 +58,7 @@ class Report extends Component {
   }
 
   render() {
+    if (this.state.loading) return <Loading />;
     return (
       <div className="template" id="patient-print">
         <div className="header-wrapper">

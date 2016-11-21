@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import axios from 'axios';
+import Loading from '../../components/Loading';
 import DiseaseListEdit from '../../components/DiseaseListEdit';
-import { dumpDiseases } from '../../dummyData';
 
 class EditDisease extends Component {
   constructor(props) {
     super(props);
     this.state = {
       allDiseases: null,
+      loading: true,
     };
-    this.getDiseases = this.getDiseases.bind(this);
   }
 
-  componentWillMount() {
-    this.getDiseases();
-  }
-
-  getDiseases() {
-    const allDiseases = dumpDiseases();
-    this.setState({ allDiseases });
+  componentDidMount() {
+    axios.get('https://nutkun.himikorin.com:4443/api/disease')
+    .then(res => {
+      const allDiseases = res.data.data;
+      this.setState({ allDiseases, loading: false });
+    });
   }
 
   renderDiseases() {
@@ -26,13 +26,15 @@ class EditDisease extends Component {
       <DiseaseListEdit
         no={i}
         name={m.name}
-        id={m.id}
+        id={m.diseaseID}
+        key={m._id}
         info={m.info}
         ICD10={m.ICD10}
       />
     ));
   }
   render() {
+    if (this.state.loading) return <Loading />;
     return (
       <div className="template" id="patient-print">
         <div className="header-wrapper">
@@ -44,7 +46,7 @@ class EditDisease extends Component {
         </div>
         <div className="content-wrapper">
           <p className="head-text">รายการโรคทั้งหมด</p>
-          <div>
+          <div style={{ marginBottom: '50px' }}>
             { this.renderDiseases() }
           </div>
           <RaisedButton

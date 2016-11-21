@@ -12,6 +12,7 @@
     "react-scripts": "0.7.0"
   },
   "dependencies": {
+    "axios": "^0.15.2",
     "chart.js": "^2.4.0",
     "classnames": "^2.2.5",
     "eslint": "^3.10.2",
@@ -26,7 +27,8 @@
     "react-event-calendar": "^0.3.0",
     "react-router": "^3.0.0",
     "react-router-transition": "0.0.6",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-tap-event-plugin": "^2.0.1",
+    "whatwg-fetch": "^2.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

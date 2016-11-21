@@ -65,7 +65,7 @@ class AppointChoosePatient extends Component {
           </div>
         </div>
         <div className="content-wrapper">
-          <p className="head-text">กรุณาเลือกแพทย์ที่ต้องการนัด</p>
+          <p className="head-text">กรุณาเลือกผู้ป่วยที่ต้องการนัด</p>
           <div style={{ marginBottom: '20px' }}>
             {this.renderPatients() }
           </div>

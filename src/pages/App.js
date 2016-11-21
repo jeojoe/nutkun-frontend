@@ -63,7 +63,7 @@ class App extends Component {
                 <div className="row">
                   <div className="twelve columns">
                     <Link to={`/${role}`}>
-                      <h6 className="hospital-name">โรงพยาบาลอาจารย์ธราทิพย์</h6>
+                      <h6 className="hospital-name">โรงพยาบาลอาจารย์ธาราทิพย์</h6>
                       <img id="logo" src="/logo-small.png" role="presentation" />
                     </Link>
                     <div className="right">

@@ -68,6 +68,8 @@ class DiagnoseBasic extends Component {
               rows={2}
               rowsMax={4}
             />
+          </div>
+          <div style={{ paddingTop: '50px' }}>
             <RaisedButton
               label="ย้อนกลับ"
               backgroundColor="#95a5a6"

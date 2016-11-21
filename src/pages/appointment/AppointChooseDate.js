@@ -10,6 +10,7 @@ import areIntlLocalesSupported from 'intl-locales-supported';
 import UserCard from '../../components/UserCard';
 import { dumpDoctors, dumpPeriods, dumpAppointed, dumpPatients, dataAPI } from '../../dummyData';
 import { insertAppoint, checkAppoint, reappoint } from '../../dummyAPI';
+import './AppointChooseDate.css';
 
 let DateTimeFormat;
 
@@ -195,6 +196,7 @@ class AppointChooseDate extends Component {
                 onChange={(e, value) => {
                   this.changePeriod(value);
                 }}
+                className="periods-radio"
               >
                 {this.renderPeriods()}
               </RadioButtonGroup>
@@ -213,6 +215,7 @@ class AppointChooseDate extends Component {
                 shouldDisableDate={(date) => {
                   return moment().isAfter(date, 'day');
                 }}
+                className="calendar"
               />
             </div>
           </div>

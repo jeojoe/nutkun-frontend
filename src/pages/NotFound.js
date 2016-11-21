@@ -7,8 +7,8 @@ const NotFound = ({ currentUser, router }) => (
   <div className="not-found-wrapper">
     <p>ขออภัย, ไม่พบหน้าที่ต้องการ</p>
     <RaisedButton
-      label="ไปที่หน้าหลัก"
-      onClick={() => router.push(`/${currentUser.role}`)}
+      label="ย้อนกลับ"
+      onClick={() => router.goBack()}
     />
   </div>
 );

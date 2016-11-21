@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import axios from 'axios';
 import PersonnalList from '../../components/PersonnalList';
-import { dumpUsers } from '../../dummyData';
+import Loading from '../../components/Loading';
 
 class EditPersonnal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       allPersonnals: null,
+      loading: true,
     };
-    this.getPersonnals = this.getPersonnals.bind(this);
   }
 
-  componentWillMount() {
-    this.getPersonnals();
-  }
-
-  getPersonnals() {
-    const allPersonnals = dumpUsers();
-    this.setState({ allPersonnals });
+  componentDidMount() {
+    axios.get('https://nutkun.himikorin.com:4443/api/user').then((res) => {
+      const allPersonnals = res.data.data;
+      this.setState({ allPersonnals, loading: false });
+    });
   }
 
   renderPersonnals() {
@@ -34,6 +33,7 @@ class EditPersonnal extends Component {
     ));
   }
   render() {
+    if (this.state.loading) return <Loading />;
     return (
       <div className="template" id="patient-print">
         <div className="header-wrapper">

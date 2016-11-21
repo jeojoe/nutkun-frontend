@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import axios from 'axios';
+import Loading from '../../components/Loading';
 import MedicineListEdit from '../../components/MedicineListEdit';
-import { dumpMedicines } from '../../dummyData';
 
 class EditMedicine extends Component {
   constructor(props) {
     super(props);
     this.state = {
       allMedicines: null,
+      loading: true,
     };
-    this.getMedicines = this.getMedicines.bind(this);
   }
 
-  componentWillMount() {
-    this.getMedicines();
-  }
-
-  getMedicines() {
-    const allMedicines = dumpMedicines();
-    this.setState({ allMedicines });
+  componentDidMount() {
+    axios.get('https://nutkun.himikorin.com:4443/api/medicine')
+    .then(res => {
+      const allMedicines = res.data.data;
+      this.setState({ allMedicines, loading: false });
+    });
   }
 
   renderMedicines() {
@@ -26,12 +26,15 @@ class EditMedicine extends Component {
       <MedicineListEdit
         no={i}
         name={m.name}
-        id={m.id}
+        id={m.medicineID}
         info={m.info}
+        key={i}
       />
     ));
   }
+
   render() {
+    if (this.state.loading) return <Loading />;
     return (
       <div className="template" id="patient-print">
         <div className="header-wrapper">
@@ -43,7 +46,7 @@ class EditMedicine extends Component {
         </div>
         <div className="content-wrapper">
           <p className="head-text">รายการยาทั้งหมด</p>
-          <div>
+          <div style={{ marginBottom: '50px' }}>
             { this.renderMedicines() }
           </div>
           <RaisedButton
