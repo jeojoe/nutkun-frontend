@@ -42,6 +42,7 @@ class AppointChooseDoctor extends Component {
         />
       ));
     } else {
+      const isStaff = this.props.location.pathname.indexOf('/staff/') >= 0;
       return this.state.doctors.map(doctor => (
         <UserCard
           src={doctor.image}
@@ -49,7 +50,7 @@ class AppointChooseDoctor extends Component {
           surename={doctor.surename}
           detail={doctor.department}
           buttonText="เพิ่มนัดแพทย์"
-          buttonLink={`/nurse/appoint/${doctor.hospitalID}`}
+          buttonLink={isStaff ? `/staff/appoint/${doctor.hospitalID}` : `/nurse/appoint/${doctor.hospitalID}`}
           key={doctor.hospitalID}
         />
       ));

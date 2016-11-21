@@ -55,7 +55,7 @@ class EditPersonnal extends Component {
             onClick={() => this.props.router.goBack()}
           />
           <RaisedButton
-            label="เพิ่มบุคลากร"
+            label="+ เพิ่มบุคลากร"
             backgroundColor="#e67e22"
             labelColor="#fff"
             style={{ float: 'right' }}

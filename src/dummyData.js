@@ -102,7 +102,7 @@ function getAppointment(appointmentID) {
 }
 
 function insertAppointment(appointment) {
-  appointment.id = appointmentIndex;
+  appointment.id = appointmentIndex.toString();
   appointments.push(appointment);
   appointmentIndex += 1;
 }

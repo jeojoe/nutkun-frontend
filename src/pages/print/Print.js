@@ -37,6 +37,9 @@ class Print extends Component {
   }
 
   renderAppointment() {
+    if (this.state.appointmentsOfUser.length === 0) {
+      return <p style={{ textAlign: 'center', margin: '100px 0 200px', color: '#999' }}>ยังไม่มีการทำนัดแพทย์อยู่ในระบบ</p>;
+    }
     return this.state.appointmentsOfUser.map((ap, i) => (
       <AppointmentCard
         patient={ap.patient}
@@ -62,7 +65,7 @@ class Print extends Component {
           </div>
         </div>
         <div className="content-wrapper">
-          <p className="head-text">กำหนดการนัดแพทย์ที่คุณมีอยู่</p>
+          <p className="head-text">กำหนดการนัดแพทย์ที่มีอยู่</p>
           <div style={{ marginBottom: '50px' }}>
             { this.renderAppointment() }
           </div>

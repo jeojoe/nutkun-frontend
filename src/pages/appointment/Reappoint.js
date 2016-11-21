@@ -39,7 +39,7 @@ class Reappoint extends Component {
 
   renderAppointment() {
     if (this.state.appointmentsOfUser.length === 0) {
-      return <p style={{ textAlign: 'center', margin: '100px 0 200px', color: '#999' }}>คุณยังไม่มีการทำนัดแพทย์อยู่ในระบบ</p>;
+      return <p style={{ textAlign: 'center', margin: '100px 0 200px', color: '#999' }}>ยังไม่มีการทำนัดแพทย์อยู่ในระบบ</p>;
     }
     return this.state.appointmentsOfUser.map((ap, i) => (
       <AppointmentCard
@@ -61,13 +61,13 @@ class Reappoint extends Component {
       <div className="template" id="patient-print">
         <div className="header-wrapper">
           <div className="left">
-            พิมพ์ใบนัดแพทย์
+            ยกเลิก / เลื่อนนัดแพทย์
           </div>
           <div className="right">
           </div>
         </div>
         <div className="content-wrapper">
-          <p className="head-text">กำหนดการนัดแพทย์ที่คุณมีอยู่</p>
+          <p className="head-text">กำหนดการนัดแพทย์ที่มีอยู่</p>
           <div style={{ marginBottom: '50px' }}>
             { this.renderAppointment() }
           </div>
