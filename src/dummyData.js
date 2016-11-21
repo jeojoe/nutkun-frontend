@@ -37,6 +37,9 @@ const users = [
   new User('5', 'hn-pharmacist1', 'จิรัฐ', 'อยากเป็นเภสัชร', 'pharmacist', 'อยากเป็นเภสัชรคริๆๆ', '1160100439885', 'usernamepharmacist', 'passwordpharmacist', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'female', 'pharmacist@gmail.com', '0906866563', [departments[0].name]),
   new User('6', 'hn-admin1', 'จิรัฐ', 'อยากเป็นแอดมิน', 'admin', 'อยากเป็นแอดมินคริๆๆ', '1160100439886', 'usernameadmin', 'passwordadmin', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'female', 'admin@gmail.com', '0906866563'),
   new User('7', 'hn-patient2', 'จนิน', 'ชอบป่วย', 'patient', 'อยากเป็นผู้ป่วยคริๆๆ', '1160100439887', 'usernamepatient2', 'passwordpatient', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'male', 'patient2@gmail.com', '0906866563', null, [medicines[1]]),
+  new User('8', 'hn-patient3', 'มิตสึฮะ', 'จัง', 'patient', 'อยากเป็นผู้ป่วยคริๆๆ', '1160100439888', 'usernamepatient3', 'passwordpatient', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'male', 'patient2@gmail.com', '0906866563', null, [medicines[1]]),
+  new User('9', 'hn-doctor3', 'ทากิ', 'คุง', 'doctor', 'อยากเป็นหมอคริๆๆ', '1160100439889', 'usernamedoctor3', 'passworddoctor', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'male', 'doctor1@gmail.com', '0906866563', [departments[0].name], null),
+  
 ];
 
 const dumpUsers = () => {
@@ -124,15 +127,23 @@ function reappoint(appointmentID, datetime) {
 */
 const prescriptions = [
   {
-    id: '1',
-    patient: users[2],
+    Doctor:{
+      HN:users[9].hospitalID,
+      name: users[9].name,
+      surname: users[9].surename
+      
+    } ,
+    patient: {
+      HN:users[8].hospitalID,
+      name: users[8].name,
+      surname: users[8].surename
+      
+    } ,
     medicine: [medicines[0], medicines[1]],
+    dose: ["1","2"],
+    status: "waiting"
   },
-  {
-    id: '2',
-    patient: users[7],
-    medicine: [medicines[0], medicines[1]],
-  },
+  
 ];
 
 const dumpPrescriptions = () => {
