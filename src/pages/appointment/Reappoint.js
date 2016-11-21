@@ -7,24 +7,30 @@ import AppointmentCard from '../../components/AppointmentCard';
 class Reappoint extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      appointmentsOfUser: null,
+    }
     this.reappoint = this.reappoint.bind(this);
   }
 
-  getAppointment() {
-    return dumpAppointed();
+  componentWillMount() {
+    const allAppointments = dumpAppointed();
+    const user = this.props.currentUser;
+
+    const appointmentsOfUser = allAppointments.filter((a) => {
+      if (user.role === 'patient') {
+        return a.patient.hospitalID === user.hospitalID;
+      } else if (user.role === 'doctor') {
+        return a.doctor.hospitalID === user.hospitalID;
+      }
+      return true;
+    });
+
+    this.setState({ appointmentsOfUser });
   }
 
   reappoint(appointID) {
     this.props.router.push(`/reappoint/${appointID}`);
-    // const { pathname } = this.props.location;
-
-    // if (pathname.indexOf('patient') > 0) {
-    //   this.props.router.push(`/patient/reappoint/${appointID}`);
-    // } else if (pathname.indexOf('doctor') > 0) {
-    //   this.props.router.push(`/doctor/reappoint/${appointID}`);
-    // } else if (pathname.indexOf('nurse') > 0) {
-    //   this.props.router.push(`/nurse/reappoint/${appointID}`);
-    // } else if ()
   }
 
   cancal() {
@@ -32,7 +38,7 @@ class Reappoint extends Component {
   }
 
   renderAppointment() {
-    return this.getAppointment().map((ap, i) => (
+    return this.state.appointmentsOfUser.map((ap, i) => (
       <AppointmentCard
         patient={ap.patient}
         doctor={ap.doctor}
@@ -46,6 +52,7 @@ class Reappoint extends Component {
       />
     ));
   }
+
   render() {
     return (
       <div className="template" id="patient-print">
@@ -58,7 +65,7 @@ class Reappoint extends Component {
         </div>
         <div className="content-wrapper">
           <p className="head-text">กำหนดการนัดแพทย์ที่คุณมีอยู่</p>
-          <div>
+          <div style={{ marginBottom: '50px' }}>
             { this.renderAppointment() }
           </div>
           <RaisedButton

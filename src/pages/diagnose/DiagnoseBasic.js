@@ -43,9 +43,9 @@ class DiagnoseBasic extends Component {
           <div className="users-wrapper">
             <UserCard
               src={patient.image}
-              name={`นายแพทย์${patient.name} ${patient.surename}`}
+              name={`ผู้ป่วย${patient.name} ${patient.surename}`}
               surename={patient.surename}
-              detail={`แผนก${patient.department}`}
+              detail={`เลขประจำตัวโรงพยาบาล ${patient.hospitalID}`}
             />
           </div>
           <div className="datepicker-wrapper" style={{ position: 'relative' }}>
@@ -64,6 +64,9 @@ class DiagnoseBasic extends Component {
             <TextField
               floatingLabelText="ผลการวินิจฉัย"
               ref={(input) => { this.diagnose = input; }}
+              multiLine={true}
+              rows={2}
+              rowsMax={4}
             />
             <RaisedButton
               label="ย้อนกลับ"

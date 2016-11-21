@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { RouteTransition } from 'react-router-transition';
 import { Link, withRouter } from 'react-router';
 import './App.css';
 import logo from './logo-small.png';
@@ -32,15 +33,18 @@ class App extends Component {
   }
 
   signout() {
-    window.localStorage.setItem('currentUser', '');
-    this.props.router.push('/');
+    const yes = confirm('คุณต้องการออกจากระบบใช่หรือไม่ ?');
+    if (yes) {
+      window.localStorage.setItem('currentUser', '');
+      this.props.router.push('/');
+    }
   }
 
   render() {
     const { children, router } = this.props;
     const { currentUser } = this.state;
     // no user login
-    if (router.isActive('/', true)) {
+    if (router.isActive('/', true) || router.isActive('/forgot', true) || this.props.location.pathname.indexOf('/change/') >= 0) {
       return (
         <div className="app">
           { children && React.cloneElement(children, {
@@ -50,7 +54,7 @@ class App extends Component {
       );
     }
 
-    const { name, surename, role, id } = currentUser;
+    const { name, surename, role, id, hospitalID } = currentUser;
     return (
       <div className="app">
         { router.isActive('/', true) || router.isActive('/forgot', true) || this.props.location.pathname.indexOf('/change/') >= 0 ?
@@ -64,7 +68,7 @@ class App extends Component {
                     </Link>
                     <div className="right">
                       <div className="user">
-                        <p>{`${currentUser.roleText}${name} ${surename}, HN${id}`}</p>
+                        <p>{`${currentUser.roleText}${name} ${surename}, ${hospitalID}`}</p>
                       </div>
                       <div className="signout" onClick={this.signout}>
                         <i className="fa fa-power-off"></i>
@@ -75,9 +79,17 @@ class App extends Component {
               </div>
             </div>
         }
-        { children && React.cloneElement(children, {
-          currentUser,
-        })}
+        <RouteTransition
+          pathname={this.props.location.pathname}
+  atEnter={{ opacity: 0 }}
+    atLeave={{ opacity: 0 }}
+    atActive={{ opacity: 1 }}
+  className="yo"
+        >
+          { children && React.cloneElement(children, {
+            currentUser,
+          })}
+        </RouteTransition>
       </div>
     );
   }

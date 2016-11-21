@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import { withRouter } from 'react-router';
@@ -10,9 +11,11 @@ class ForgotPassword extends Component {
       otp: null,
       hn: null,
       telNo: null,
+      openFail: false,
     };
     this.sendOTP = this.sendOTP.bind(this);
     this.checkOTP = this.checkOTP.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   sendOTP() {
@@ -30,12 +33,24 @@ class ForgotPassword extends Component {
     if (inputOTP === otp) {
       this.props.router.push(`/change/${hn}`);
     } else {
-      console.log('error');
+      this.setState({ openFail: true });
     }
+  }
+
+  handleClose() {
+    this.setState({ openFail: false });
   }
 
   render() {
     const { otp, telNo } = this.state;
+    const actions = [
+      <FlatButton
+        label="Cancel"
+        primary
+        onTouchTap={this.handleClose}
+      />,
+    ];
+
     if (!otp) {
       return (
         <div id="auth">
@@ -86,12 +101,15 @@ class ForgotPassword extends Component {
             className="login-btn"
             onClick={this.checkOTP}
           />
-          {/*<FlatButton
-            label="ย้อนกลับ"
-            className="forgot-btn"
-            style={{ marginTop: '10px' }}
-            onClick={() => this.props.router.goBack()}
-          />*/}
+          <Dialog
+            title="ล้มเหลว"
+            actions={actions}
+            modal={false}
+            open={this.state.openFail}
+            onRequestClose={this.handleClose}
+          >
+            The actions in this window were passed in as an array of React objects.
+          </Dialog>
         </div>
       );
     }

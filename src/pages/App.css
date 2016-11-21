@@ -1,6 +1,5 @@
-.app {
-  width: 100%;
-  min-height: 700px;
+html {
+  padding-bottom: 30px;
   background-color: #f8f8f8;
 }
 
@@ -8,6 +7,9 @@
   text-align: center;
 }
 
+.btn-back {
+  margin: 30px 30px 5px;
+}
 #nav {
   position: fixed;
   top: 0;
@@ -96,6 +98,10 @@
   border-radius: 5px;
   border: 1px solid #eee;
 }
+/*
+#patient-history .datepicker-wrapper {
+  width: 500px;
+}*/
 
 .datepicker-wrapper {
   display: inline-block;
@@ -107,4 +113,28 @@
   display: inline-block;
   width: 300px;
   vertical-align: top;
+}
+
+/* transition */
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+.yo > div {
+  position: absolute;
+  left: calc(50% - 450px);
 }

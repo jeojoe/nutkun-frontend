@@ -11,24 +11,28 @@ const UserCard = ({ src, name, detail, buttonText, buttonText2, buttonLink, butt
     />
     <h6>{name}</h6>
     <p>{detail}</p>
-    { buttonText ?
-      <RaisedButton
-        backgroundColor="#3498db"
-        labelColor="#fff"
-        className="user-card-button"
-        label={buttonText}
-        onClick={() => router.push(buttonLink)}
-      /> : ''
-    }
-    { buttonText2 ?
-      <RaisedButton
-        backgroundColor="#e67e22"
-        labelColor="#fff"
-        className="user-card-button"
-        label={buttonText2}
-        onClick={() => router.push(buttonLink2)}
-      /> : ''
-    }
+    <div style={{ marginBottom: '15px' }}>
+      { buttonText ?
+        <RaisedButton
+          backgroundColor="#3498db"
+          labelColor="#fff"
+          className="user-card-button"
+          label={buttonText}
+          onClick={() => router.push(buttonLink)}
+        /> : ''
+      }
+    </div>
+    <div>
+      { buttonText2 ?
+        <RaisedButton
+          backgroundColor="#e67e22"
+          labelColor="#fff"
+          className="user-card-button"
+          label={buttonText2}
+          onClick={() => router.push(buttonLink2)}
+        /> : ''
+      }
+    </div>
   </div>
 );
 

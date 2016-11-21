@@ -8,8 +8,8 @@ import Calendar from 'material-ui/DatePicker/Calendar';
 import Dialog from 'material-ui/Dialog';
 import areIntlLocalesSupported from 'intl-locales-supported';
 import UserCard from '../../components/UserCard';
-import { dumpDoctors, dumpPeriods, dumpAppointed, dumpPatients } from '../../dummyData';
-import { insertAppoint, checkAppoint } from '../../dummyAPI';
+import { dumpDoctors, dumpPeriods, dumpAppointed, dumpPatients, dataAPI } from '../../dummyData';
+import { insertAppoint, checkAppoint, reappoint } from '../../dummyAPI';
 
 let DateTimeFormat;
 
@@ -37,42 +37,22 @@ class AppointChooseDate extends Component {
     this.saveAppoint = this.saveAppoint.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.changePeriod = this.changePeriod.bind(this);
+    this.reappoint = this.reappoint.bind(this);
   }
 
   componentWillMount() {
     // eslint-disable-next-line
     let { params: { doctorID, patientID, appointmentID } } = this.props;
     const allAppointments = dumpAppointed();
-    const allPatients = dumpPatients();
-    const allDoctors = dumpDoctors();
     const periods = dumpPeriods();
 
-    let appointment;
-    let patient;
-    let doctor;
-
-    allAppointments.forEach(app => {
-      if (app.id === appointmentID) {
-        appointment = app;
-      }
-    });
-
+    const appointment = dataAPI.getAppointment(appointmentID);
     if (!doctorID || !patientID) {
       doctorID = appointment.doctor.hospitalID;
       patientID = appointment.patient.hospitalID;
     }
-
-    allPatients.forEach(pat => {
-      if (pat.hospitalID === patientID) {
-        patient = pat;
-      }
-    });
-
-    allDoctors.forEach(doc => {
-      if (doc.hospitalID === doctorID) {
-        doctor = doc;
-      }
-    });
+    const doctor = dataAPI.getDoctor(doctorID);
+    const patient = dataAPI.getPatient(patientID);
 
     this.setState({ appointment, patient, doctor, periods, allAppointments, period: appointment ? appointment.period : { id: '1', name: 'ช่วงเช้า' } });
   }
@@ -95,10 +75,22 @@ class AppointChooseDate extends Component {
   }
 
   saveAppoint() {
-    console.log('yoo');
     const pickedDate = this.calendar.state.selectedDate;
     const { doctor, patient, period } = this.state;
     const result = insertAppoint(doctor, patient, pickedDate, period);
+    if (result.success) {
+      this.setState({
+        openSuccess: false,
+        openDone: true,
+        errorMessage: result.message,
+      });
+    }
+  }
+
+  reappoint() {
+    const pickedDate = this.calendar.state.selectedDate;
+    const { appointmentID } = this.props.params;
+    const result = reappoint(appointmentID, pickedDate);
     if (result.success) {
       this.setState({
         openSuccess: false,
@@ -132,6 +124,7 @@ class AppointChooseDate extends Component {
 
   render() {
     const { doctor, patient, appointment, period, openFail, openSuccess, openDone, errorMessage } = this.state;
+    const isReappoint = this.props.params.appointmentID;
     const { role } = this.props.currentUser;
     const failedActions = [
       <RaisedButton
@@ -152,11 +145,11 @@ class AppointChooseDate extends Component {
         style={{ margin: '15px' }}
       />,
       <RaisedButton
-        label="ยืนยันการนัดแพทย์"
+        label={isReappoint ? 'ยืนยันการเลื่อนนัดแพทย์' : 'ยืนยันการทำนัดแพทย์'}
         backgroundColor="#2ecc71"
         keyboardFocused
         labelColor="#fff"
-        onTouchTap={this.saveAppoint}
+        onTouchTap={isReappoint ? this.reappoint : this.saveAppoint}
         style={{ margin: '15px' }}
       />,
     ];
@@ -208,7 +201,7 @@ class AppointChooseDate extends Component {
               <Calendar
                 firstDayOfWeek={1}
                 DateTimeFormat={DateTimeFormat}
-                defaultDate={appointment ? appointment.datetime : false}
+                defaultDate={appointment ? new Date(appointment.datetime) : false}
                 locale="th"
                 formatDate={new DateTimeFormat('th', {
                   weekday: 'long',

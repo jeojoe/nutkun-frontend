@@ -73,6 +73,7 @@ class AppointChoosePatient extends Component {
             label="ย้อนกลับ"
             backgroundColor="#95a5a6"
             labelColor="#fff"
+            className="btn-back"
             onClick={() => this.props.router.goBack()}
           />
         </div>

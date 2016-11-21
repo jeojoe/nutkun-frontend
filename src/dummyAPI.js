@@ -26,7 +26,7 @@ function login(hn, password) {
   // Get all users
   const users = dumpUsers();
   // check if has user
-  const resultUser = users.find(u => u.hospitalID === hn);
+  const resultUser = users.find(u => { console.log(u); return u.hospitalID === hn;});
   // error catching
   if (!resultUser) {
     return new Response(false, 'ไม่พบผู้ใช้งาน');
@@ -71,8 +71,15 @@ function checkAppoint(doctorHospitalID, patientHospitalID, pickedDate, period) {
 
 function insertAppoint(doctor, patient, pickedDate, period) {
   dataAPI.insertAppointment(new Appointment('id', patient, doctor, pickedDate, period));
-  console.log(dumpAppointed());
   return new Response(true, `เพิ่มนัดระหว่างนายแพทย์${doctor.name} ${doctor.surename} และ ผู้ป่วย${patient.name} ${patient.surename} ในวันที่ ${moment(pickedDate).format('LL')} (${period.name}) เรียบร้อย`);
 }
 
-export { login, checkAppoint, insertAppoint };
+function reappoint(appointmentID, datetime) {
+  if (!(datetime instanceof Date)) {
+    return new Response(false, 'ไม่ใช่วันที่');
+  }
+  dataAPI.reappoint(appointmentID, datetime);
+  return new Response(true, 'เลื่อนวันนัดเรียบร้อย');
+}
+
+export { login, checkAppoint, insertAppoint, reappoint };
