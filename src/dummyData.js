@@ -9,6 +9,7 @@ const departments = [
   new Department('2', 'อายุรกรรม'),
 ];
 
+const dumpDepartments = () => departments;
 /*
   === Medicines : Data ===
 */
@@ -28,9 +29,9 @@ const users = [
   new User('0', 'hn-doctor1', 'จิรัฐ', 'อยากเป็นหมอ1', 'doctor', 'อยากเป็นหมอคริๆๆ', '1160100439880', 'usernamedoctor1', 'passworddoctor', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'male', 'doctor1@gmail.com', '0906866563', [departments[0].name], null),
   new User('1', 'hn-doctor2', 'จิรัฐ', 'อยากเป็นหมอ2', 'doctor', 'อยากเป็นหมอคริๆๆ', '1160100439881', 'usernamedoctor2', 'passworddoctor', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'male', 'doctor2@gmail.com', '0906866563', [departments[1].name], null),
   new User('2', 'hn-patient1', 'จิรัฐ', 'อยากเป็นผู้ป่วย', 'patient', 'อยากเป็นผู้ป่วยคริๆๆ', '1160100439882', 'usernamepatient1', 'passwordpatient', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'female', 'patient1@gmail.com', '0906866563', null, [medicines[0]]),
-  new User('3', 'hn-nurse1', 'จิรัฐ', 'อยากเป็นพยาบาล', 'nurse', 'อยากเป็นพยาบาลคริๆๆ', '1160100439883', 'usernamenurse', 'passwordnurse', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'female', 'nurse@gmail.com', '0906866563'),
-  new User('4', 'hn-staff1', 'จิรัฐ', 'อยากเป็นเจ้าหน้าที่', 'staff', 'อยากเป็นเจ้าหน้าที่คริๆๆ', '1160100439884', 'usernamestaff', 'passwordstaff', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'male', 'staff@gmail.com', '0906866563'),
-  new User('5', 'hn-pharmacist1', 'จิรัฐ', 'อยากเป็นเภสัชร', 'pharmacist', 'อยากเป็นเภสัชรคริๆๆ', '1160100439885', 'usernamepharmacist', 'passwordpharmacist', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'female', 'pharmacist@gmail.com', '0906866563'),
+  new User('3', 'hn-nurse1', 'จิรัฐ', 'อยากเป็นพยาบาล', 'nurse', 'อยากเป็นพยาบาลคริๆๆ', '1160100439883', 'usernamenurse', 'passwordnurse', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'female', 'nurse@gmail.com', '0906866563', [departments[0].name]),
+  new User('4', 'hn-staff1', 'จิรัฐ', 'อยากเป็นเจ้าหน้าที่', 'staff', 'อยากเป็นเจ้าหน้าที่คริๆๆ', '1160100439884', 'usernamestaff', 'passwordstaff', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'male', 'staff@gmail.com', '0906866563', [departments[0].name]),
+  new User('5', 'hn-pharmacist1', 'จิรัฐ', 'อยากเป็นเภสัชร', 'pharmacist', 'อยากเป็นเภสัชรคริๆๆ', '1160100439885', 'usernamepharmacist', 'passwordpharmacist', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'female', 'pharmacist@gmail.com', '0906866563', [departments[0].name]),
   new User('6', 'hn-admin1', 'จิรัฐ', 'อยากเป็นแอดมิน', 'admin', 'อยากเป็นแอดมินคริๆๆ', '1160100439886', 'usernameadmin', 'passwordadmin', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'female', 'admin@gmail.com', '0906866563'),
   new User('7', 'hn-patient2', 'จนิน', 'ชอบป่วย', 'patient', 'อยากเป็นผู้ป่วยคริๆๆ', '1160100439887', 'usernamepatient2', 'passwordpatient', moment().subtract(Math.floor(Math.random() * 1000, 'days')), '77/6 ม.3', 'male', 'patient2@gmail.com', '0906866563', null, [medicines[1]]),
 ];
@@ -187,4 +188,4 @@ const dumpDatasets = () => {
 
 const dataAPI = { insertAppointment, getDoctor, getPatient, getAppointment, reappoint };
 
-export { dumpDoctors, dumpPatients, dumpPeriods, dumpAppointed, dumpPrescriptions, dumpMedicines, dumpDiseases, dumpUsers, dumpDatasets, dataAPI };
+export { dumpDoctors, dumpPatients, dumpPeriods, dumpAppointed, dumpPrescriptions, dumpMedicines, dumpDiseases, dumpUsers, dumpDatasets, dumpDepartments, dataAPI };

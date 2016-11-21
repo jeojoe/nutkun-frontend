@@ -44,8 +44,8 @@ class EditPersonnal extends Component {
           </div>
         </div>
         <div className="content-wrapper">
-          <p className="head-text">รายการโรคทั้งหมด</p>
-          <div>
+          <p className="head-text">รายการบุคลากร</p>
+          <div style={{ marginBottom: '50px' }}>
             { this.renderPersonnals() }
           </div>
           <RaisedButton

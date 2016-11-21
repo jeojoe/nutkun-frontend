@@ -23,13 +23,26 @@ html {
 }
 
 #nav #logo {
-  width: 170px;
+  width: 80px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 6px;
+}
+
+#nav .hospital-name {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 6px 10px 0 0;
+  border-right: 1px solid #1abc9c;
+  padding-right: 10px;
+  color: #1abc9c;
+  font-size: 20px;
 }
 
 #nav .right {
   display: inline-block;
   float: right;
-  padding-top: 4px;
+  padding-top: 2px;
 }
 
 #nav .right .user {

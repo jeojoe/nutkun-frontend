@@ -7,7 +7,7 @@ import MenuItem from 'material-ui/MenuItem';
 import areIntlLocalesSupported from 'intl-locales-supported';
 import RaisedButton from 'material-ui/RaisedButton';
 import UserCard from '../../components/UserCard';
-import { dumpUsers } from '../../dummyData';
+import { dumpUsers, dumpDepartments } from '../../dummyData';
 import './EditPersonnal2.css';
 
 let DateTimeFormat;
@@ -25,23 +25,24 @@ class EditPersonnal2 extends Component {
       name: '',
       surename: '',
       department: '',
-      role: '',
+      role: 'doctor',
       email: '',
       password: '',
       telNo: '',
-      gender: '',
+      gender: 'male',
       PID: '',
       address: '',
       username: '',
       image: '',
       birthdate: Date.now(),
+      allDepartments: null,
     };
-    this.getPersonnal = this.getPersonnal.bind(this);
+    this.getData = this.getData.bind(this);
     this.save = this.save.bind(this);
   }
 
   componentWillMount() {
-    this.getPersonnal();
+    this.getData();
     const path = this.props.location.pathname;
     const isDoctor = path.indexOf('/doctor') >= 0;
     const isNurse = path.indexOf('/nurse') >= 0;
@@ -50,8 +51,11 @@ class EditPersonnal2 extends Component {
     }
   }
 
-  getPersonnal() {
+  getData() {
     const { personnalID } = this.props.params;
+    const allDepartments = dumpDepartments();
+    console.log(allDepartments);
+    // const allRoles = ['doctor', 'patient', 'nurse', 'staff', 'pharmacist', 'admin'];
     if (personnalID !== '-1') {
       const personnal = dumpUsers().find(u => u.hospitalID === personnalID);
       const { name, surename, username, password, birthdate,
@@ -70,6 +74,11 @@ class EditPersonnal2 extends Component {
         username,
         image,
         birthdate,
+        allDepartments,
+      });
+    } else {
+      this.setState({
+        allDepartments,
       });
     }
   }
@@ -93,6 +102,12 @@ class EditPersonnal2 extends Component {
     //   image,
     //   birthdate,
     // });
+  }
+
+  renderDepartmentItems() {
+    return this.state.allDepartments.map((d, i) => (
+      <MenuItem value={d.name} primaryText={d.name} key={i} />
+    ));
   }
 
   render() {
@@ -130,21 +145,28 @@ class EditPersonnal2 extends Component {
               ref={(input) => { this.surename = input; }}
               onChange={e => this.setState({ surename: e.target.value })}
             />
-            { role !== 'patient' ?
-              <TextField
-                defaultValue={role}
+            { role !== 'patient' && role !== 'admin' ?
+              <SelectField
                 floatingLabelText="ตำแหน่ง"
-                ref={(input) => { this.role = input; }}
-                onChange={e => this.setState({ role: e.target.value })}
-              /> : ''
+                value={role}
+                onChange={(e, i, value) => this.setState({ role: value })}
+              >
+                <MenuItem value="doctor" primaryText="แพทย์" />
+                <MenuItem value="patient" primaryText="ผู้ป่วย" />
+                <MenuItem value="nurse" primaryText="พยาบาล" />
+                <MenuItem value="staff" primaryText="เจ้าหน้าที่" />
+                <MenuItem value="pharmacist" primaryText="เภสัชกร" />
+                <MenuItem value="admin" primaryText="ผู้ดูแลระบบ" />
+              </SelectField> : ''
             }
-            { role !== 'patient' ?
-              <TextField
-                defaultValue={department}
+            { role !== 'patient' && role !== 'admin' ?
+              <SelectField
                 floatingLabelText="แผนก"
-                ref={(input) => { this.department = input; }}
-                onChange={e => this.setState({ department: e.target.value })}
-              /> : ''
+                value={department}
+                onChange={(e, i, value) => this.setState({ department: value })}
+              >
+                { this.renderDepartmentItems() }
+              </SelectField> : ''
             }
             <br />
             <TextField
@@ -172,9 +194,10 @@ class EditPersonnal2 extends Component {
                 weekday: 'long',
                 day: 'numeric',
                 month: 'long',
+                year: 'numeric',
               }).format}
               ref={(input) => { this.birthdate = input; }}
-              onChange={e => this.setState({ birthdate: e.target.value })}
+              onChange={(e, i, value) => this.setState({ birthdate: value })}
             />
             <br />
             <SelectField
