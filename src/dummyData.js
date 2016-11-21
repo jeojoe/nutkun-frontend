@@ -14,8 +14,11 @@ const dumpDepartments = () => departments;
   === Medicines : Data ===
 */
 const medicines = [
-  new Medicine('1', 'ยาราไนก้า', 'ยาดี จิรัฐแพ้'),
-  new Medicine('2', 'ยาหมอมี', 'ยานี้จนินแพ้'),
+  new Medicine('M0001', 'Aspirin', 'Aspirin, also known as acetylsalicylic acid (ASA), is a medication used to treat pain, fever, and inflammation.'),
+  new Medicine('M0002', 'Bascopan', 'Buscopan is known as an anticholinergic medicine. It relieves the pain of stomach and bowel cramps by helping your digestive system to relax.'),
+  new Medicine('M0003', 'Ranitidine', 'Ranitidine Tablets, USP are a competitive, reversible inhibitor of the action of histamine at the histamine H2-receptors, including receptors on the gastric cells. '),
+  new Medicine('M0004', 'Paracetamol', 'Acetaminophen is used to treat minor aches and pain and to reduce fever. It may also help treat pain from mild forms of arthritis.'),
+  new Medicine('M0005', 'Asafetida', 'Asafetida is known as an antidote for flatulence and is also prescribed for respiratory conditions like asthma, bronchitis and whooping cough.'),
 ];
 
 const dumpMedicines = () => {
