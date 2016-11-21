@@ -17,5 +17,6 @@ RUN npm run build
 
 EXPOSE 9000
 
-# defined in package.json
-CMD [ "npm", "start" ]
+RUN npm install -g pushstate-server
+
+CMD pushstate-server build
